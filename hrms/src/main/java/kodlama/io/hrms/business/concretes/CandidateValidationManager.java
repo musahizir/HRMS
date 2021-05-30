@@ -1,4 +1,4 @@
-package kodlama.io.hrms.business.concretes;
+	package kodlama.io.hrms.business.concretes;
 
 import org.springframework.stereotype.Component;
 

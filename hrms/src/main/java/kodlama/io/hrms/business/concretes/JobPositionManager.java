@@ -5,37 +5,37 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kodlama.io.hrms.business.abstracts.JobService;
-import kodlama.io.hrms.business.abstracts.JobValidationService;
+import kodlama.io.hrms.business.abstracts.JobPositionService;
+import kodlama.io.hrms.business.abstracts.JobPositionValidationService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.ErrorResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
-import kodlama.io.hrms.dataAccess.abstracts.JobDao;
-import kodlama.io.hrms.entities.concretes.Job;
+import kodlama.io.hrms.dataAccess.abstracts.JobPositionDao;
+import kodlama.io.hrms.entities.concretes.JobPosition;
 
 @Service
-public class JobManager implements JobService {
+public class JobPositionManager implements JobPositionService {
 
-	private JobDao jobDao;
-	private JobValidationService jobValidationService;
+	private JobPositionDao jobDao;
+	private JobPositionValidationService jobValidationService;
 
 	@Autowired
-	public JobManager(JobDao jobDao, JobValidationService jobValidationService) {
+	public JobPositionManager(JobPositionDao jobDao, JobPositionValidationService jobValidationService) {
 		super();
 		this.jobDao = jobDao;
 		this.jobValidationService = jobValidationService;
 	}
 
 	@Override
-	public DataResult<List<Job>> getAll() {
+	public DataResult<List<JobPosition>> getAll() {
 
-		return new SuccessDataResult<List<Job>>(this.jobDao.findAll(), "Data Listelendi");
+		return new SuccessDataResult<List<JobPosition>>(this.jobDao.findAll(), "Data Listelendi");
 	}
 
 	@Override
-	public Result add(Job job) {
+	public Result add(JobPosition job) {
 
 		if (jobValidationService.validateJob(job).isSuccess()) {
 

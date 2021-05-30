@@ -3,28 +3,28 @@ package kodlama.io.hrms.business.concretes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kodlama.io.hrms.business.abstracts.JobValidationService;
+import kodlama.io.hrms.business.abstracts.JobPositionValidationService;
 import kodlama.io.hrms.core.concretes.BusinessRules;
 import kodlama.io.hrms.core.utilities.results.ErrorResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
-import kodlama.io.hrms.dataAccess.abstracts.JobDao;
-import kodlama.io.hrms.entities.concretes.Job;
+import kodlama.io.hrms.dataAccess.abstracts.JobPositionDao;
+import kodlama.io.hrms.entities.concretes.JobPosition;
 
 @Service
-public class JobValidationManager implements JobValidationService {
+public class JobPositionValidationManager implements JobPositionValidationService {
 
-	private JobDao jobDao;
+	private JobPositionDao jobDao;
 	
 	
 	@Autowired
-	public JobValidationManager(JobDao jobDao) {
+	public JobPositionValidationManager(JobPositionDao jobDao) {
 		super();
 		this.jobDao = jobDao;
 	}
 
 	@Override
-	public Result validateJob(Job job) {
+	public Result validateJob(JobPosition job) {
 		
 		Result result = BusinessRules.Run(jobNameExist(job));
 		
@@ -35,7 +35,7 @@ public class JobValidationManager implements JobValidationService {
 		return new ErrorResult();
 	}
 	
-	private Result jobNameExist(Job job) {
+	private Result jobNameExist(JobPosition job) {
 		
 		if(jobDao.findByJobName(job.getJobName()) != null ) {
 			
