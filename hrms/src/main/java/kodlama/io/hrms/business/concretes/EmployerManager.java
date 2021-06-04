@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlama.io.hrms.business.abstracts.EmployerService;
+import kodlama.io.hrms.business.auth.EmployerValidationManager;
 import kodlama.io.hrms.core.concretes.BusinessRules;
 
 import kodlama.io.hrms.core.utilities.results.Result;

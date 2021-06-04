@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="job_titles")
-@JsonIgnoreProperties ({"hibernateLazyInitializer","handler","jobAd"})
+@JsonIgnoreProperties ({"hibernateLazyInitializer","handler , jobAd"})
 public class JobPosition {
 	
 
@@ -34,7 +35,7 @@ public class JobPosition {
 	@Column(name="job_title")
 	private String jobName;
 	
-	@OneToMany(mappedBy ="jobPosition")
+	@OneToMany(mappedBy ="jobPosition", fetch = FetchType.LAZY)
 	private List<JobAd> jobAd;
 
 }

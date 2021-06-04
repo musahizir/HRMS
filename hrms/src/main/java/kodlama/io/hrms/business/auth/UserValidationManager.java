@@ -1,8 +1,7 @@
-package kodlama.io.hrms.business.concretes;
+package kodlama.io.hrms.business.auth;
 
 import org.springframework.stereotype.Service;
 
-import kodlama.io.hrms.business.abstracts.UserValidationService;
 import kodlama.io.hrms.core.utilities.results.ErrorResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;

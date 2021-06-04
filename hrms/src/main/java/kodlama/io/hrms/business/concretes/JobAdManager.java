@@ -13,6 +13,7 @@ import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAccess.abstracts.JobAdDao;
 import kodlama.io.hrms.entities.concretes.JobAd;
+import kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto;
 
 @Service
 public class JobAdManager implements JobAdService {

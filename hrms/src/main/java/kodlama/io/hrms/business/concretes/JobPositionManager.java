@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlama.io.hrms.business.abstracts.JobPositionService;
-import kodlama.io.hrms.business.abstracts.JobPositionValidationService;
+import kodlama.io.hrms.business.auth.JobPositionValidationService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.ErrorResult;
 import kodlama.io.hrms.core.utilities.results.Result;

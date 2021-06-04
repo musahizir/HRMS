@@ -11,10 +11,18 @@ import kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto;
 public interface JobAdDao extends JpaRepository<JobAd, Integer>{
 	
 	List<JobAd> findByjobAdIsActiveTrue();
+	
 	List<JobAd> findByOrderByJobAdPostedDate();
 	
 	@Query("From JobAd where jobAdIsActive = true and employer_id =:id")
 	List<JobAd> getAllActiveJobAdByEmployer(int id);
-	void save(JobAdRegisterDto jobAd);
+	
 
+	/*
+	 * @Query("From new kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto(jp.jobPositionId, ja.jobAdDescription, c.cityId, ja.jobAdMinWage, ja.jobAdMaxWage, ja.jobAdMaxOpenPosition, ja.jobAdApplicationEnd, e.employerId) From City c Inner Join c.jobAd ja + (From Employer e Inner Join e.jobAd ja) + (From JobPosition jp Inner Join jp.jobAd ja)"
+	 * ) JobAdRegisterDto getJobAdWithJobPositionAndEmployerAndCity();
+	 * 
+	 * void save(JobAdRegisterDto jobAd);
+	 */
+	
 }
