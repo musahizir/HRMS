@@ -5,7 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kodlama.io.hrms.business.abstracts.CityService;
+import kodlama.io.hrms.business.abstracts.EmployerService;
 import kodlama.io.hrms.business.abstracts.JobAdService;
+import kodlama.io.hrms.business.abstracts.JobAdShiftService;
+import kodlama.io.hrms.business.abstracts.JobAdWorkingStyleService;
+import kodlama.io.hrms.business.abstracts.JobPositionService;
+import kodlama.io.hrms.core.concretes.BusinessRules;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.ErrorResult;
 import kodlama.io.hrms.core.utilities.results.Result;
@@ -20,24 +26,66 @@ public class JobAdManager implements JobAdService {
 
 	
 	private JobAdDao jobAdDao;
+	private CityService cityService;
+	private JobPositionService jobPositionService;
+	private EmployerService employerService;
+	private JobAdShiftService jobAdShiftService;
+	private JobAdWorkingStyleService jobAdWorkingStyleService;
 	
+	
+	
+
 	@Autowired
-	public JobAdManager(JobAdDao jobAdDao) {
+	public JobAdManager(JobAdDao jobAdDao, CityService cityService, JobPositionService jobPositionService,
+			EmployerService employerService, JobAdShiftService jobAdShiftService,
+			JobAdWorkingStyleService jobAdWorkingStyleService) {
 		super();
 		this.jobAdDao = jobAdDao;
+		this.cityService = cityService;
+		this.jobPositionService = jobPositionService;
+		this.employerService = employerService;
+		this.jobAdShiftService = jobAdShiftService;
+		this.jobAdWorkingStyleService = jobAdWorkingStyleService;
 	}
 
 	@Override
-	public Result add(JobAd jobAd) {
+	public Result add(JobAdRegisterDto jobAdRegisterDto) {
 		
-		if(checkAllColumnsFilled(jobAd).isSuccess()) {
+		Result result = BusinessRules.Run(isJobPositionValid(jobAdRegisterDto.getJobId()), isCityValid(jobAdRegisterDto.getCityId()), isJobAdWorkingStyleValid(jobAdRegisterDto.getJobAdWorkingStyleId()) ,
+				isJobAdShiftValid(jobAdRegisterDto.getJobAdShiftId()), isjobAdMaxOpenPositionValid(jobAdRegisterDto.getJobAdMaxOpenPosition()));
+		
+		if(!result.isSuccess()) {
 			
-			this.jobAdDao.save(jobAd);
-			return new SuccessResult("İş ilanı başarıyla eklendi");
+			return result;
+	}
+		
+	
+	JobAd jobAdAdd = new JobAd();
+
+	    jobAdAdd.setJobAdDescription(jobAdRegisterDto.getJobAdDescription());
+	    jobAdAdd.setJobAdApplicationEnd(jobAdRegisterDto.getJobAdApplicationEnd());
+	    jobAdAdd.setJobAdIsActive(jobAdRegisterDto.isJobAdIsActive());
+	    jobAdAdd.setJobAdMaxOpenPosition(jobAdRegisterDto.getJobAdMaxOpenPosition());
+	    jobAdAdd.setJobAdMaxWage(jobAdRegisterDto.getJobAdMaxWage());
+	    jobAdAdd.setJobAdMinWage(jobAdRegisterDto.getJobAdMinWage());
+	    jobAdAdd.setJobAdIsConfirmed(jobAdRegisterDto.isJobAdIsConfirmed());
+	    
+		jobAdAdd.setCity(cityService.getById(jobAdRegisterDto.getCityId()).getData());
+		jobAdAdd.setJobPosition(jobPositionService.getById(jobAdRegisterDto.getJobId()).getData());
+		jobAdAdd.setEmployer(employerService.getById(jobAdRegisterDto.getEmployerId()).getData());
+		jobAdAdd.setJobAdShift(jobAdShiftService.getById(jobAdRegisterDto.getJobAdShiftId()).getData());
+		jobAdAdd.setJobAdWorkingStyle(jobAdWorkingStyleService.getById(jobAdRegisterDto.getJobAdWorkingStyleId()).getData());
+		jobAdDao.save(jobAdAdd);
+		return new SuccessResult("İş ilanı eklendi");
+		
+		
+			
+			
+			
 		}
 		
-		return new ErrorResult("İş ilanı eklenemedi");
-	}
+		
+		
 
 	@Override
 	public Result update(JobAd jobAd) {
@@ -50,7 +98,7 @@ public class JobAdManager implements JobAdService {
 	public Result remove(int id) {
 		
 		this.jobAdDao.deleteById(id);
-		return new SuccessResult("İlan güncellendi");
+		return new SuccessResult("İlan silindi");
 	}
 
 	@Override
@@ -98,14 +146,56 @@ public class JobAdManager implements JobAdService {
 		return new SuccessDataResult<List<JobAd>>(this.jobAdDao.getAllActiveJobAdByEmployer(id), "İş verene ait tüm ilanlar listelendi");
 	}
 	
-	private Result checkAllColumnsFilled(JobAd jobAd) {
+	private Result isJobPositionValid(int id) {
+		if(jobPositionService.getById(id).getData() == null) return new ErrorResult("Böyle bir iş pozisyonu yok");
 		
-		if((jobAd.getCity() == null )||( jobAd.getJobAdDescription() == null || jobAd.getJobAdDescription().isBlank()) || jobAd.getJobPosition() == null) {
-		
-		return new ErrorResult("");
+		return new SuccessResult();
 	}
-
+	
+	private Result isCityValid(int id) {
+		
+		if(cityService.getById(id).getData() == null)
+			return new ErrorResult("Böyle bir şehir yok");
+		return new SuccessResult();
+		
+	}
+	
+	private Result isJobAdWorkingStyleValid(int id ){
+		
+		if(jobAdWorkingStyleService.getById(id).getData() == null)
+			return new ErrorResult("Böyle bir çalışma türü yok");
+		
+		return new SuccessResult();
+	}
+	
+	private Result isJobAdShiftValid(int id) {
+		if(jobAdShiftService.getById(id).getData() == null) 
+			return new ErrorResult("Böyle bir vardiya türü yok");
+		
+		return new SuccessResult();
+		
+	}
+	
+	private Result isjobAdMaxOpenPositionValid(int jobAdMaxOpenPosition) {
+		if(jobAdMaxOpenPosition<=0) return new ErrorResult("Minimum iş pozisyonu 0 ve 0'dan küçük olamaz");
 		return new SuccessResult();
 	}
 
+	@Override
+	public DataResult<List<JobAd>> getAllByJobAdIsConfirmedFalse() {
+		
+		return new SuccessDataResult<List<JobAd>>(this.jobAdDao.getAllByJobAdIsConfirmedFalse());
+	}
+
+	@Override
+	public Result changeConfirmedFalseToTrue(int id) {
+		
+		JobAd jobAd = getById(id).getData();
+		jobAd.setJobAdIsConfirmed(true);	
+		update(jobAd);
+		
+		return new SuccessResult("İlan onaylandı");
+	}
+	
+	
 }

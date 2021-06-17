@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,7 +11,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,24 +18,21 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name="job_titles")
+@AllArgsConstructor
 
-public class JobPosition {
-	
+@Table(name="job_ad_working_style")
+public class JobAdWorkingStyle {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="job_title_id")
-	private int jobId;
+	@Column(name="job_ad_working_style_id")
+	private int jobAdWorkingStyleId;
 	
-	
-	@Column(name="job_title")
-	private String jobName;
+	@Column(name="job_ad_working_style_type")
+	private String jobAdWorkingStyleType;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy ="jobPosition", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "jobAdWorkingStyle")
 	private List<JobAd> jobAd;
-
 }

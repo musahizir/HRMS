@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import kodlama.io.hrms.business.abstracts.EmployerService;
 import kodlama.io.hrms.business.auth.EmployerValidationManager;
 import kodlama.io.hrms.core.concretes.BusinessRules;
-
+import kodlama.io.hrms.core.utilities.results.DataResult;
+import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
@@ -59,6 +60,16 @@ public class EmployerManager extends UserManager<Employer> implements EmployerSe
 	private Result hrmsConfirmation(Employer employer) {
 
 		return new SuccessResult();
+	}
+
+
+
+	@Override
+	public DataResult<Employer> getById(int id) {
+		Employer employer = employerDao.findById(id);
+		if(employer == null) return new ErrorDataResult<Employer>();
+		
+		return new SuccessDataResult<Employer>(employer);
 	}
 
 }

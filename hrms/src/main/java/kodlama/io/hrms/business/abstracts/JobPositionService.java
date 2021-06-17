@@ -11,5 +11,7 @@ public interface JobPositionService {
 	DataResult <List<JobPosition>> getAll();
 	
 	Result add(JobPosition job);
+	
+	DataResult <JobPosition> getById(int id);
 
 }

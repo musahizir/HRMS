@@ -8,30 +8,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlama.io.hrms.business.abstracts.CityService;
+import kodlama.io.hrms.business.abstracts.JobAdShiftService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
-import kodlama.io.hrms.entities.concretes.City;
+import kodlama.io.hrms.entities.concretes.JobAdShift;
 
 @RestController
-@RequestMapping("/api/city")
+@RequestMapping("/api/jobAdShift")
 @CrossOrigin
-public class CityController {
-	
-	private CityService cityService;
+public class JobAdShiftControllers {
+
+	private JobAdShiftService jobAdShiftService;
 
 	@Autowired
-	public CityController(CityService cityService) {
+	public JobAdShiftControllers(JobAdShiftService jobAdShiftService) {
 		super();
-		this.cityService = cityService;
+		this.jobAdShiftService = jobAdShiftService;
 	}
 	
-	@GetMapping("/getall")
-	
-	public DataResult<List<City>> getAll(){
+	@GetMapping("/getAll")
+	DataResult<List<JobAdShift>> getAll(){
 		
-		return this.cityService.getAll();
-		
-		
+		return this.jobAdShiftService.getAll();
 	}
-
 }

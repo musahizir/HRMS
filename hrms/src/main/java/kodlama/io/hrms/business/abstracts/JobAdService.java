@@ -12,13 +12,15 @@ import kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto;
 
 public interface JobAdService {
 	
-	Result add(JobAd jobAd);
+	Result add(JobAdRegisterDto jobAd);
 	
 	Result update(JobAd jobAd);
 	
 	Result remove(int id);
 	
 	Result changeActiveToPassive(int id);
+	
+	Result changeConfirmedFalseToTrue(int id);
 	
 	DataResult <JobAd> getById(int id);
 	
@@ -27,5 +29,7 @@ public interface JobAdService {
 	DataResult<List<JobAd>> findByOrderByJobAdPostedDate();
 	
 	DataResult<List<JobAd>> getAllActiveJobAdByEmployer(int id);
+	
+	DataResult <List<JobAd>> getAllByJobAdIsConfirmedFalse();
 
 }

@@ -47,7 +47,10 @@ public class JobAd {
 	private int jobAdMaxOpenPosition;
 	
 	@Column(name="job_ad_is_active")
-	private boolean jobAdIsActive;
+	private boolean jobAdIsActive = true;
+	
+	@Column(name="job_ad_is_confirmed")
+	private boolean jobAdIsConfirmed = false;
 	
 	@Column(name="job_ad_posted_date")
 	private LocalDate jobAdPostedDate;
@@ -63,4 +66,14 @@ public class JobAd {
 	@ManyToOne()
 	@JoinColumn(name= "employer_id")
 	private Employer employer;
+	
+	@ManyToOne()
+	@JoinColumn(name= "job_ad_shift_id")
+	private JobAdShift jobAdShift;
+	
+	@ManyToOne()
+	@JoinColumn(name= "job_ad_working_style_id")
+	private JobAdWorkingStyle jobAdWorkingStyle;
+
+	
 }

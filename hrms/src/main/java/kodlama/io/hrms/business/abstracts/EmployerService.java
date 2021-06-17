@@ -11,4 +11,6 @@ public interface EmployerService extends UserService<Employer> {
 	public DataResult <List<Employer>> getAll();
 
 	Result add(Employer employer);
+	
+	DataResult <Employer> getById(int id);
 }
