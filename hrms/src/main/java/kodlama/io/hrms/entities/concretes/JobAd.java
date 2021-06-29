@@ -47,13 +47,16 @@ public class JobAd {
 	private int jobAdMaxOpenPosition;
 	
 	@Column(name="job_ad_is_active")
-	private boolean jobAdIsActive = true;
+	private boolean jobAdIsActive;
 	
 	@Column(name="job_ad_is_confirmed")
-	private boolean jobAdIsConfirmed = false;
+	private boolean jobAdIsConfirmed;
 	
 	@Column(name="job_ad_posted_date")
 	private LocalDate jobAdPostedDate;
+	
+	@Column(name="job_ad_confirm_request")
+	private boolean jobAdConfirmRequest;
 	
 	@ManyToOne()
 	@JoinColumn(name = "job_title_id")

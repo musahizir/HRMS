@@ -3,6 +3,7 @@ package kodlama.io.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,9 +15,11 @@ import kodlama.io.hrms.business.cvservices.CvExperienceService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.CvExperience;
+import kodlama.io.hrms.entities.concretes.dto.CvExperienceDto;
 
 @RestController
 @RequestMapping("/api/cvExperience")
+@CrossOrigin
 public class CvExperienceController {
 	
 	
@@ -29,16 +32,16 @@ public class CvExperienceController {
 	}
 
 	@PostMapping("/add")
-	public Result add(@RequestBody CvExperience cvExperience) {
+	public Result add(@RequestBody CvExperienceDto cvExperienceDto) {
 		
-		return this.cvExperienceService.add(cvExperience);
+		return this.cvExperienceService.add(cvExperienceDto);
 	
 	}
 	
 	@PostMapping("/update")
-	public Result update(@RequestBody CvExperience cvExperience) {
+	public Result update(@RequestBody CvExperienceDto cvExperienceDto, int id) {
 		
-		return this.cvExperienceService.update(cvExperience);
+		return this.cvExperienceService.update(cvExperienceDto, id);
 	}
 	
 	@PostMapping("/delete")
@@ -48,15 +51,15 @@ public class CvExperienceController {
 	}
 	
 	@GetMapping("/getAllByCandidateIdOrderByCvExperienceLeaveDateDesc")
-	public DataResult<List<CvExperience>> getAllByCandidateIdOrderByCvExperienceLeaveDateDesc(int candidateId)  {
+	public DataResult<List<CvExperience>> getAllByCv_CvIdOrderByCvExperienceLeaveDateDesc(int cvId)  {
 
-		return this.cvExperienceService.getAllByCandidateIdOrderByCvExperienceLeaveDateDesc(candidateId);
+		return this.cvExperienceService.getAllByCv_CvIdOrderByCvExperienceLeaveDateDesc(cvId);
 	}
 	
-	@GetMapping("/getAllByCandidateId")
-	public DataResult<List<CvExperience>> getAllByCandidateId(int candidateId) {
+	@GetMapping("/getAllByCv")
+	public DataResult<List<CvExperience>> getAllByCv_CvId(int cvId) {
 
-		return this.cvExperienceService.getAllByCandidateId(candidateId);
+		return this.cvExperienceService.getAllByCv_CvId(cvId);
 	}
 
 }

@@ -41,10 +41,10 @@ public class CandidatesController {
 
 		return this.candidateService.add(candidate);
 	}
-	
-	@GetMapping("/getCvByCandidateId")
-	public DataResult<CvDto> getCvByCandidateId(@RequestParam int candidateId){
-		
-		return this.candidateService.getCvByCandidateId(candidateId);
-	}
 }
+//	@GetMapping("/getCvByCandidateId")
+//	public DataResult<CvDto> getCvByCandidateId(@RequestParam int candidateId){
+//		
+//		return this.candidateService.getCvByCandidateId(candidateId);
+//	}
+//}

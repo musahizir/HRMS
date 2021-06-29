@@ -3,6 +3,7 @@ package kodlama.io.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,10 +15,12 @@ import kodlama.io.hrms.business.cvservices.CvProgrammingLanguageService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.CvProgrammingLanguage;
+import kodlama.io.hrms.entities.concretes.dto.CvProgrammingLanguageDto;
 
 
 @RestController
 @RequestMapping("/api/programmingLanguage")
+@CrossOrigin
 public class CvProgrammingLanguageController {
 	
 	private CvProgrammingLanguageService cvProgrammingLanguageService;
@@ -29,16 +32,16 @@ public class CvProgrammingLanguageController {
 	}
 
 	@PostMapping("/add")
-	public Result add(@RequestBody CvProgrammingLanguage cvProgrammingLanguage) {
+	public Result add(@RequestBody CvProgrammingLanguageDto cvProgrammingLanguageDto) {
 		
-		return this.cvProgrammingLanguageService.add(cvProgrammingLanguage);
+		return this.cvProgrammingLanguageService.add(cvProgrammingLanguageDto);
 	
 	}
 	
 	@PostMapping("/update")
-	public Result update(@RequestBody CvProgrammingLanguage cvProgrammingLanguage) {
+	public Result update(@RequestBody CvProgrammingLanguageDto cvProgrammingLanguageDto, int id) {
 		
-		return this.cvProgrammingLanguageService.update(cvProgrammingLanguage);
+		return this.cvProgrammingLanguageService.update(cvProgrammingLanguageDto, id);
 	}
 	
 	@PostMapping("/delete")
@@ -47,10 +50,10 @@ public class CvProgrammingLanguageController {
 		return this.cvProgrammingLanguageService.remove(id);
 	}
 	
-	@GetMapping("/getAllByCandidateId")
-	public DataResult<List<CvProgrammingLanguage>> getAllByCandidateId(int candidateId) {
+	@GetMapping("/getAllByCv")
+	public DataResult<List<CvProgrammingLanguage>> getAllByCv_CvId(int cvId) {
 
-		return this.cvProgrammingLanguageService.getAllByCandidateId(candidateId);
+		return this.cvProgrammingLanguageService.getAllByCv_CvId(cvId);
 	}
 
 }

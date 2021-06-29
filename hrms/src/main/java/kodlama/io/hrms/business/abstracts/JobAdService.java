@@ -20,6 +20,10 @@ public interface JobAdService {
 	
 	Result changeActiveToPassive(int id);
 	
+	Result changePassiveToActive(int id);
+	
+	Result changeConfirmRequestTrueToFalse(int id);
+	
 	Result changeConfirmedFalseToTrue(int id);
 	
 	DataResult <JobAd> getById(int id);
@@ -31,5 +35,7 @@ public interface JobAdService {
 	DataResult<List<JobAd>> getAllActiveJobAdByEmployer(int id);
 	
 	DataResult <List<JobAd>> getAllByJobAdIsConfirmedFalse();
+	
+	DataResult <List<JobAd>> getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue();
 
 }

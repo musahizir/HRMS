@@ -3,6 +3,7 @@ package kodlama.io.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,10 +15,12 @@ import kodlama.io.hrms.business.cvservices.CvLanguageService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.CvLanguage;
+import kodlama.io.hrms.entities.concretes.dto.CvLanguageDto;
 
 
 @RestController
 @RequestMapping("/api/cvLanguage")
+@CrossOrigin
 public class CvLanguageController {
 	
 	private CvLanguageService cvLanguageService;
@@ -30,16 +33,16 @@ public class CvLanguageController {
 
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody CvLanguage cvLanguage) {
+	public Result add(@RequestBody CvLanguageDto cvLanguageDto) {
 		
-		return this.cvLanguageService.add(cvLanguage);
+		return this.cvLanguageService.add(cvLanguageDto);
 	
 	}
 	
 	@PostMapping("/update")
-	public Result update(@RequestBody CvLanguage cvLanguage ) {
+	public Result update(@RequestBody CvLanguageDto cvLanguageDto, int id ) {
 		
-		return this.cvLanguageService.update(cvLanguage);
+		return this.cvLanguageService.update(cvLanguageDto, id);
 	}
 	
 	@PostMapping("/delete")
@@ -48,9 +51,9 @@ public class CvLanguageController {
 		return this.cvLanguageService.remove(id);
 	}
 	
-	@GetMapping("/getAllByCandidateId")
-	public DataResult<List<CvLanguage>> getAllByCandidateId(int candidateId)  {
+	@GetMapping("/getAllByCv")
+	public DataResult<List<CvLanguage>> getAllByCv_CvId(int cvId)  {
 
-		return this.cvLanguageService.getAllByCandidateId(candidateId);
+		return this.cvLanguageService.getAllByCv_CvId(cvId);
 	}
 }

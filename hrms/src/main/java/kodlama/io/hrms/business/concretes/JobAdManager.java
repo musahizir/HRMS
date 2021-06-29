@@ -69,6 +69,7 @@ public class JobAdManager implements JobAdService {
 	    jobAdAdd.setJobAdMaxWage(jobAdRegisterDto.getJobAdMaxWage());
 	    jobAdAdd.setJobAdMinWage(jobAdRegisterDto.getJobAdMinWage());
 	    jobAdAdd.setJobAdIsConfirmed(jobAdRegisterDto.isJobAdIsConfirmed());
+	    jobAdAdd.setJobAdConfirmRequest(jobAdRegisterDto.isJobAdConfirmRequest());
 	    
 		jobAdAdd.setCity(cityService.getById(jobAdRegisterDto.getCityId()).getData());
 		jobAdAdd.setJobPosition(jobPositionService.getById(jobAdRegisterDto.getJobId()).getData());
@@ -196,6 +197,34 @@ public class JobAdManager implements JobAdService {
 		
 		return new SuccessResult("İlan onaylandı");
 	}
+
+	@Override
+	public Result changePassiveToActive(int id) {
+		
+
+		JobAd jobAd = getById(id).getData();
+		jobAd.setJobAdIsActive(true);	
+		update(jobAd);
+		
+		return new SuccessResult("İlan Aktive edildi");
+	}
+
+	@Override
+	public DataResult<List<JobAd>> getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue() {
+		
+		return new SuccessDataResult<List<JobAd>>(this.jobAdDao.getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue());
+	}
+
+	@Override
+	public Result changeConfirmRequestTrueToFalse(int id) {
+		
+		JobAd jobAd = getById(id).getData();
+		jobAd.setJobAdConfirmRequest(false);
+		update(jobAd);
+		
+		return new SuccessResult("İlan Onay Sürecinden Kaldırıldı");
+	}
+
 	
 	
 }

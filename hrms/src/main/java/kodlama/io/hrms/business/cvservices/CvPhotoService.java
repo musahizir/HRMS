@@ -11,17 +11,19 @@ import kodlama.io.hrms.entities.concretes.CvPhoto;
 
 public interface CvPhotoService {
 
-
-	Result add(CvPhoto cvPhoto);
-	
-	Result update(CvPhoto cvPhoto, MultipartFile file);
-	
-	Result remove(int id);
-	
-	Result add(CvPhoto cvPhoto, MultipartFile file);
-	
-	DataResult<List<CvPhoto>> getAllByCandidateId(int candidateId);
-	
-	Result addAll(List<CvPhoto> cvPhoto);
-	
+//
+//	Result add(CvPhoto cvPhoto);
+//	
+//	Result update(CvPhoto cvPhoto, MultipartFile file);
+//	
+//	Result remove(int id);
+//	
+//	Result add(CvPhoto cvPhoto, MultipartFile file);
+//	
+//	DataResult<List<CvPhoto>> getAllByCv_CvId(int cvId);
+//	
+//	Result addAll(List<CvPhoto> cvPhoto);
+//	
+//	DataResult <CvPhoto> getById(int id);
+//	
 }

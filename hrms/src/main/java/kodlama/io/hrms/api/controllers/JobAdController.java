@@ -52,6 +52,14 @@ public class JobAdController {
 	
 	}
 	
+	@PostMapping("/changePassiveToActive")
+	public Result changePassiveToActive(int id) {
+		return this.jobAdService.changePassiveToActive(id);
+		
+	
+	}
+	
+	
 	@PostMapping("/changeConfirmedFalseToTrue")
 	
 	public Result changeConfirmedFalseToTrue(int id) {
@@ -59,6 +67,13 @@ public class JobAdController {
 		return this.jobAdService.changeConfirmedFalseToTrue(id);
 	}
 	
+
+	@PostMapping("/changeConfirmRequestTrueToFalse")
+	
+	public Result changeConfirmRequestTrueToFalse(int id) {
+		
+		return this.jobAdService.changeConfirmRequestTrueToFalse(id);
+	}
 	
 	@GetMapping("/findByjobAdIsActiveTrue")
 	public DataResult<List<JobAd>> findByjobAdIsActiveTrue(){
@@ -88,7 +103,11 @@ public class JobAdController {
 	
 	
 	
-	
+	@GetMapping("/getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue")
+	DataResult<List<JobAd>> getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue(){
+		
+		return this.jobAdService.getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue();
+	}
 	
 	
 	

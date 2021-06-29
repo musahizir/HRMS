@@ -25,7 +25,10 @@ public class JobAdRegisterDto {
 	private LocalDate jobAdApplicationEnd;
 	
 	@JsonIgnore
-	private boolean jobAdIsActive = true;
+	private boolean jobAdIsActive = false;
+	
+	@JsonIgnore
+	private boolean jobAdConfirmRequest = true;
 	
 	@JsonIgnore
 	private boolean jobAdIsConfirmed = false;

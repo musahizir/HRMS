@@ -29,29 +29,27 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
 	private CandidateDao candidateDao;
 	private CandidateValidationService candidateValidationService;
 	private MernisService mernisService;
-	private CvDetailsService cvDetailsService;
-	private CvExperienceService cvExperienceService;
-	private CvLanguageService cvLanguageService;
-	private CvProgrammingLanguageService cvProgrammingLanguageService;
-	private CvSchoolService cvSchoolService;
-	private CvLinkService cvLinkService;
+//	private CvDetailsService cvDetailsService;
+//	private CvExperienceService cvExperienceService;
+//	private CvLanguageService cvLanguageService;
+//	private CvProgrammingLanguageService cvProgrammingLanguageService;
+//	private CvSchoolService cvSchoolService;
+//	private CvLinkService cvLinkService;
 
 	@Autowired
 	public CandidateManager(UserDao<Candidate> userDao, CandidateDao candidateDao,
-			CandidateValidationService candidateValidationService, MernisService mernisService,
-			CvDetailsService cvDetailsService, CvExperienceService cvExperienceService,
-			CvLanguageService cvLanguageService, CvProgrammingLanguageService cvProgrammingLanguageService,
-			CvSchoolService cvSchoolService, CvLinkService cvLinkService) {
+			CandidateValidationService candidateValidationService, MernisService mernisService
+			) {
 		super(userDao);
 		this.candidateDao = candidateDao;
 		this.candidateValidationService = candidateValidationService;
 		this.mernisService = mernisService;
-		this.cvDetailsService = cvDetailsService;
-		this.cvExperienceService = cvExperienceService;
-		this.cvLanguageService = cvLanguageService;
-		this.cvProgrammingLanguageService = cvProgrammingLanguageService;
-		this.cvSchoolService = cvSchoolService;
-		this.cvLinkService = cvLinkService;
+//		this.cvDetailsService = cvDetailsService;
+//		this.cvExperienceService = cvExperienceService;
+//		this.cvLanguageService = cvLanguageService;
+//		this.cvProgrammingLanguageService = cvProgrammingLanguageService;
+//		this.cvSchoolService = cvSchoolService;
+//		this.cvLinkService = cvLinkService;
 	}
 
 	
@@ -104,30 +102,39 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
 
 		return new SuccessResult();
 	}
-
-	@Override
-	public DataResult<CvDto> getCvByCandidateId(int candidateId){
-		
-		CvDto cvDto = new CvDto();
-		
-		cvDto.setCandidate(this.getById(candidateId).getData());
-		cvDto.setCvDetails(this.cvDetailsService.getAllByCandidateId(candidateId).getData());
-		cvDto.setCvExperience(this.cvExperienceService.getAllByCandidateIdOrderByCvExperienceLeaveDateDesc(candidateId).getData());
-		cvDto.setCvLanguage(this.cvLanguageService.getAllByCandidateId(candidateId).getData());
-		cvDto.setCvLink(this.cvLinkService.getAllByCandidateId(candidateId).getData());
-		cvDto.setCvProgrammingLanguage(this.cvProgrammingLanguageService.getAllByCandidateId(candidateId).getData());
-		cvDto.setCvSchool(this.cvSchoolService.getAllByCandidateIdOrderByCvSchoolGraduateDate(candidateId).getData());
-		
-		
-		
-		return new SuccessDataResult<>(cvDto);
-				
-	}
+//
+//	@Override
+//	public DataResult<CvDto> getCvByCandidateId(int candidateId){
+//		
+//		CvDto cvDto = new CvDto();
+//		
+//		cvDto.setCandidate(this.getById(candidateId).getData());
+//		cvDto.setCvDetails(this.cvDetailsService.getAllByCandidateId(candidateId).getData());
+//		cvDto.setCvExperience(this.cvExperienceService.getAllByCandidateIdOrderByCvExperienceLeaveDateDesc(candidateId).getData());
+//		cvDto.setCvLanguage(this.cvLanguageService.getAllByCandidateId(candidateId).getData());
+//		cvDto.setCvLink(this.cvLinkService.getAllByCandidateId(candidateId).getData());
+//		cvDto.setCvProgrammingLanguage(this.cvProgrammingLanguageService.getAllByCandidateId(candidateId).getData());
+//		cvDto.setCvSchool(this.cvSchoolService.getAllByCandidateIdOrderByCvSchoolGraduateDate(candidateId).getData());
+//		
+//		
+//		
+//		return new SuccessDataResult<>(cvDto);
+//		return null;
+//				
+//	}
 
 	@Override
 	public DataResult<Candidate> getById(int id) {
 		
 		return new SuccessDataResult<>(this.candidateDao.findById(id).get());
+	}
+
+
+
+	@Override
+	public DataResult<CvDto> getCvByCandidateId(int candidateId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

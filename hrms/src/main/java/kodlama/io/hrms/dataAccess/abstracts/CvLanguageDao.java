@@ -9,6 +9,7 @@ import kodlama.io.hrms.entities.concretes.CvLanguage;
 
 public interface CvLanguageDao extends JpaRepository<CvLanguage, Integer>{
 	
-	List<CvLanguage> getAllByCandidateId(int candidateId);
+	List<CvLanguage> getAllByCv_CvId(int cvId);
 
+	CvLanguage findById(int id);
 }

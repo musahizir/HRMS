@@ -17,8 +17,11 @@ public interface JobAdDao extends JpaRepository<JobAd, Integer>{
 	List<JobAd> getAllActiveJobAdByEmployer(int id);
 	
 	List<JobAd> getAllByJobAdIsConfirmedFalse();
-	
+		
 	List<JobAd> findById(int id);
+	
+	@Query("From JobAd where jobAdIsConfirmed = false and jobAdConfirmRequest = true ")
+	List<JobAd> getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue();
 	
 	/*
 	 * @Query("From new kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto(jp.jobPositionId, ja.jobAdDescription, c.cityId, ja.jobAdMinWage, ja.jobAdMaxWage, ja.jobAdMaxOpenPosition, ja.jobAdApplicationEnd, e.employerId) From City c Inner Join c.jobAd ja + (From Employer e Inner Join e.jobAd ja) + (From JobPosition jp Inner Join jp.jobAd ja)"
