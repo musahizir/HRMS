@@ -2,10 +2,14 @@ package kodlama.io.hrms.dataAccess.abstracts;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import kodlama.io.hrms.entities.concretes.JobAd;
+import kodlama.io.hrms.entities.concretes.dto.JobAdFilterDto;
 
 public interface JobAdDao extends JpaRepository<JobAd, Integer>{
 	
@@ -23,11 +27,16 @@ public interface JobAdDao extends JpaRepository<JobAd, Integer>{
 	@Query("From JobAd where jobAdIsConfirmed = false and jobAdConfirmRequest = true ")
 	List<JobAd> getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue();
 	
-	/*
-	 * @Query("From new kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto(jp.jobPositionId, ja.jobAdDescription, c.cityId, ja.jobAdMinWage, ja.jobAdMaxWage, ja.jobAdMaxOpenPosition, ja.jobAdApplicationEnd, e.employerId) From City c Inner Join c.jobAd ja + (From Employer e Inner Join e.jobAd ja) + (From JobPosition jp Inner Join jp.jobAd ja)"
-	 * ) JobAdRegisterDto getJobAdWithJobPositionAndEmployerAndCity();
-	 * 
-	 * void save(JobAdRegisterDto jobAd);
-	 */
+	
+	@Query("Select j from kodlama.io.hrms.entities.concretes.JobAd j where ((:#{#filter.cityId}) IS NULL OR j.city.cityId IN (:#{#filter.cityId}))"
+	+" and ((:#{#filter.jobId}) IS NULL OR j.jobPosition.jobId IN (:#{#filter.jobId}))"
+	+" and ((:#{#filter.jobAdWorkingStyleId}) IS NULL OR j.jobAdWorkingStyle.jobAdWorkingStyleId IN (:#{#filter.jobAdWorkingStyleId}))"
+	+" and ((:#{#filter.jobAdShiftId}) IS NULL OR j.jobAdShift.jobAdShiftId IN (:#{#filter.jobAdShiftId}))"
+	+" and j.jobAdIsActive = true"
+	)
+	public Page<JobAd> getByFilter(@Param("filter") JobAdFilterDto jobAdFilterDto, Pageable pageable);
+	
+	
+	
 	
 }

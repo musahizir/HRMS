@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,7 +31,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name="candidates")
 @PrimaryKeyJoinColumn(name="candidate_id")
-@JsonIgnoreProperties ({"hibernateLazyInitializer","handler","cv"})
+@JsonIgnoreProperties ({"hibernateLazyInitializer","handler","cv","favoriteJobAd"})
 public class Candidate extends User {
 	
 	public Candidate(int id, String email, String password, String firstName, String lastName, String nationalityId,
@@ -48,6 +50,8 @@ public class Candidate extends User {
 	private String lastName;
 	
 	@Column(name="nationality_id")
+	@Min(value=11, message ="Kimlik numarası 11 haneli olmalıdır.")
+	@Max(value=11, message ="Kimlik numarası 11 haneli olmalıdır.")
 	private String nationalityId;
 	
 	@Column(name="birth_year")
@@ -55,8 +59,13 @@ public class Candidate extends User {
 	
 	
 
-	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "candidate")
+	@JsonIgnore
 	private List<Cv> cv ;
+	
+	@OneToMany(mappedBy = "candidate")
+	@JsonIgnore
+	private List<FavoriteJobAd> favoriteJobAd ;
 	
 }
 

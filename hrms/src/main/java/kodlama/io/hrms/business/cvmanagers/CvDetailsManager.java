@@ -24,11 +24,6 @@ public class CvDetailsManager implements CvDetailsService {
 	private CvService cvService;
 	
 	
-	
-	
-
-
-
 
 
 	@Autowired

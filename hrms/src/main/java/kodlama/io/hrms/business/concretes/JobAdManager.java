@@ -3,6 +3,8 @@ package kodlama.io.hrms.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kodlama.io.hrms.business.abstracts.CityService;
@@ -19,6 +21,7 @@ import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAccess.abstracts.JobAdDao;
 import kodlama.io.hrms.entities.concretes.JobAd;
+import kodlama.io.hrms.entities.concretes.dto.JobAdFilterDto;
 import kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto;
 
 @Service
@@ -225,6 +228,17 @@ public class JobAdManager implements JobAdService {
 		return new SuccessResult("İlan Onay Sürecinden Kaldırıldı");
 	}
 
-	
+	@Override
+	public DataResult<List<JobAd>> getAllPageNumberAndPageSizeAndFilter(int pageNo, int pageSize,
+			JobAdFilterDto jobAdFilterDto) {
+		
+		Pageable pageable = PageRequest.of(pageNo -1, pageSize);
+		
+//		var data = this.jobAdDao.getByFilter(jobAdFilterDto, pageable);
+		
+		return new SuccessDataResult<List<JobAd>>(this.jobAdDao.getByFilter(jobAdFilterDto, pageable).getContent(), this.jobAdDao.getByFilter(jobAdFilterDto, pageable).getTotalElements()+ "");
+	}
+
+//	data.getContent(), String.valueOf(data.getTotalPages())
 	
 }

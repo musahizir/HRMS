@@ -16,6 +16,7 @@ import kodlama.io.hrms.business.abstracts.JobAdService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.JobAd;
+import kodlama.io.hrms.entities.concretes.dto.JobAdFilterDto;
 import kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto;
 
 @RestController
@@ -66,6 +67,13 @@ public class JobAdController {
 		
 		return this.jobAdService.changeConfirmedFalseToTrue(id);
 	}
+    
+	@PostMapping("/getAllPageNumberAndPageSizeAndFilter")
+	public Result getAllPageNumberAndPageSizeAndFilter(@RequestParam int pageNo, int pageSize, @RequestBody
+			JobAdFilterDto jobAdFilterDto) {
+		
+		return this.jobAdService.getAllPageNumberAndPageSizeAndFilter(pageNo, pageSize, jobAdFilterDto);
+	}
 	
 
 	@PostMapping("/changeConfirmRequestTrueToFalse")
@@ -103,7 +111,7 @@ public class JobAdController {
 	
 	
 	
-	@GetMapping("/getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue")
+	@PostMapping("/getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue")
 	DataResult<List<JobAd>> getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue(){
 		
 		return this.jobAdService.getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue();

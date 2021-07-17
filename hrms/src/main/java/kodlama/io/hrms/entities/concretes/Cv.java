@@ -63,7 +63,7 @@ public class Cv {
 	@OneToMany(mappedBy = "cv")
 	private List<CvSchool> cvSchool ;
 	
-	@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "candidate_id")
 	private Candidate candidate; 
 

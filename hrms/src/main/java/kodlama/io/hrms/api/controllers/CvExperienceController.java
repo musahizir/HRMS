@@ -61,5 +61,12 @@ public class CvExperienceController {
 
 		return this.cvExperienceService.getAllByCv_CvId(cvId);
 	}
+	
+	@GetMapping("/getById")
+	public Result getById(@RequestParam int id) {
+		
+		return this.cvExperienceService.getById(id);
+		
+	}
 
 }

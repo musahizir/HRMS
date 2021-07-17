@@ -1,4 +1,4 @@
-package kodlama.io.hrms.dataAccess.abstracts;
+	package kodlama.io.hrms.dataAccess.abstracts;
 
 import java.util.List;
 

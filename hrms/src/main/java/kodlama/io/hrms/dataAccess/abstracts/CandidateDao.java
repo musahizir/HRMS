@@ -8,6 +8,6 @@ public interface CandidateDao extends UserDao<Candidate> {
 
 	Optional<Candidate> findByNationalityId(String nationalityId);
 	
-	
+	Candidate findById(int id);
 
 }

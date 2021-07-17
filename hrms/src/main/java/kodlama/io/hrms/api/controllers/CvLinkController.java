@@ -54,4 +54,11 @@ public class CvLinkController {
 
 		return this.cvLinkService.getAllByCv_CvId(cvId);
 	}
+	
+	@GetMapping("/getById")
+	public Result getById(@RequestParam int id) {
+		
+		return this.cvLinkService.getById(id);
+		
+	}
 }

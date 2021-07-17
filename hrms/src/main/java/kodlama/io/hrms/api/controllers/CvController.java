@@ -16,6 +16,7 @@ import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.City;
 import kodlama.io.hrms.entities.concretes.Cv;
+import kodlama.io.hrms.entities.concretes.dto.CvAddDto;
 import kodlama.io.hrms.entities.concretes.dto.CvDetailsDto;
 import kodlama.io.hrms.entities.concretes.dto.CvDto;
 
@@ -37,12 +38,16 @@ public class CvController {
 	
 	
 
-	@PostMapping("/add")
-	Result add(@RequestBody Cv cv) {
+	@PostMapping("/addx")
+	Result addx(@RequestBody Cv cv) {
 
-		return this.cvService.add(cv);
+		return this.cvService.addx(cv);
 	}
-	
+	@PostMapping("/add")
+	Result add(@RequestBody CvAddDto cvAddDto){
+
+		return this.cvService.add(cvAddDto);
+	}
 
 	
 	@PostMapping("/cvDetailsAdd")

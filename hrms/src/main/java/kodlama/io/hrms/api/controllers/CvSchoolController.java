@@ -64,5 +64,12 @@ public class CvSchoolController {
 		return this.cvSchoolService.getAllByCv_CvId(cvId);
 	}
 	
+	@GetMapping("/getById")
+	public Result getById(@RequestParam int id) {
+		
+		return this.cvSchoolService.getById(id);
+		
+	}
+	
 	
 }

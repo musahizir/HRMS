@@ -55,5 +55,12 @@ public class CvProgrammingLanguageController {
 
 		return this.cvProgrammingLanguageService.getAllByCv_CvId(cvId);
 	}
+	
+	@GetMapping("/getById")
+	public Result getById(@RequestParam int id) {
+		
+		return this.cvProgrammingLanguageService.getById(id);
+		
+	}
 
 }

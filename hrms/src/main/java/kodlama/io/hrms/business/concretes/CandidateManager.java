@@ -21,6 +21,7 @@ import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAccess.abstracts.CandidateDao;
 import kodlama.io.hrms.dataAccess.abstracts.UserDao;
 import kodlama.io.hrms.entities.concretes.Candidate;
+import kodlama.io.hrms.entities.concretes.CvDetails;
 import kodlama.io.hrms.entities.concretes.dto.CvDto;
 
 @Service
@@ -102,34 +103,15 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
 
 		return new SuccessResult();
 	}
-//
-//	@Override
-//	public DataResult<CvDto> getCvByCandidateId(int candidateId){
-//		
-//		CvDto cvDto = new CvDto();
-//		
-//		cvDto.setCandidate(this.getById(candidateId).getData());
-//		cvDto.setCvDetails(this.cvDetailsService.getAllByCandidateId(candidateId).getData());
-//		cvDto.setCvExperience(this.cvExperienceService.getAllByCandidateIdOrderByCvExperienceLeaveDateDesc(candidateId).getData());
-//		cvDto.setCvLanguage(this.cvLanguageService.getAllByCandidateId(candidateId).getData());
-//		cvDto.setCvLink(this.cvLinkService.getAllByCandidateId(candidateId).getData());
-//		cvDto.setCvProgrammingLanguage(this.cvProgrammingLanguageService.getAllByCandidateId(candidateId).getData());
-//		cvDto.setCvSchool(this.cvSchoolService.getAllByCandidateIdOrderByCvSchoolGraduateDate(candidateId).getData());
-//		
-//		
-//		
-//		return new SuccessDataResult<>(cvDto);
-//		return null;
-//				
-//	}
+
 
 	@Override
 	public DataResult<Candidate> getById(int id) {
-		
-		return new SuccessDataResult<>(this.candidateDao.findById(id).get());
+		Candidate candidate = candidateDao.findById(id);
+		return new SuccessDataResult<Candidate>(candidate);
 	}
 
-
+	
 
 	@Override
 	public DataResult<CvDto> getCvByCandidateId(int candidateId) {

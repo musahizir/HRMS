@@ -42,15 +42,22 @@ public class EmployeeControllers {
 	}
 
 	@PostMapping("/update")
-	Result update(Employee employee) {
+	Result update(@RequestBody Employee employee, int id) {
 
-		return this.employeeService.update(employee);
+		return this.employeeService.update(employee, id);
 	}
 
 	@PostMapping("/delete")
 	Result delete(@RequestParam int employeeId) {
 
 		return this.employeeService.delete(employeeId);
+	}
+	
+	@GetMapping("/getById")
+	public Result getById(@RequestParam int id) {
+		
+		return this.employeeService.getById(id);
+		
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.JobAd;
+import kodlama.io.hrms.entities.concretes.dto.JobAdFilterDto;
 import kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto;
 
 
@@ -37,5 +38,9 @@ public interface JobAdService {
 	DataResult <List<JobAd>> getAllByJobAdIsConfirmedFalse();
 	
 	DataResult <List<JobAd>> getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue();
+	
+	DataResult <List<JobAd>> getAllPageNumberAndPageSizeAndFilter(int pageNo, int pageSize, JobAdFilterDto jobAdFilterDto);
+	
+	
 
 }

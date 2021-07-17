@@ -40,5 +40,7 @@ public class Employer extends User{
 	@JsonIgnore
 	@OneToMany(mappedBy = "employer")
 	private List<JobAd> jobAd;
+	
+
 
 }

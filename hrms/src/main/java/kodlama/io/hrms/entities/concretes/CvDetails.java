@@ -43,7 +43,7 @@ public class CvDetails {
 	@ManyToOne()
 	@JoinColumn(name = "cv_id")
 	private Cv cv; 
-	
+	 
 	
 
 }
