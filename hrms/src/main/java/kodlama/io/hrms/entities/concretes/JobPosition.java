@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,22 +21,20 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="job_titles")
+@Table(name = "job_titles")
 
 public class JobPosition {
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="job_title_id")
+	@Column(name = "job_title_id")
 	private int jobId;
-	
-	
-	@Column(name="job_title")
+
+	@Column(name = "job_title")
 	private String jobName;
-	
+
 	@JsonIgnore
-	@OneToMany(mappedBy ="jobPosition", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "jobPosition", fetch = FetchType.LAZY)
 	private List<JobAd> jobAd;
 
 }

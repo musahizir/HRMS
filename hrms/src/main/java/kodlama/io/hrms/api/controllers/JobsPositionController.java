@@ -20,25 +20,23 @@ import kodlama.io.hrms.entities.concretes.JobPosition;
 @CrossOrigin
 public class JobsPositionController {
 
-	
 	private JobPositionService jobService;
-	
+
 	@Autowired
 	public JobsPositionController(JobPositionService jobService) {
 		super();
 		this.jobService = jobService;
 	}
 
-
 	@GetMapping("/getall")
-	public DataResult <List<JobPosition>> getAll(){
-		
+	public DataResult<List<JobPosition>> getAll() {
+
 		return this.jobService.getAll();
 	}
-	
+
 	@PostMapping("/add")
-	public Result add(@RequestBody JobPosition job){
-		
+	public Result add(@RequestBody JobPosition job) {
+
 		return this.jobService.add(job);
 	}
 }

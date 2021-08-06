@@ -10,29 +10,27 @@ import kodlama.io.hrms.entities.concretes.Candidate;
 import tr.gov.nvi.tckimlik.WS.KPSPublicSoapProxy;
 
 @Service
-public class MernisAdapter implements MernisService{
-	
+public class MernisAdapter implements MernisService {
+
 	@Override
-    public boolean checkIfRealPerson(Candidate candidate) {
+	public boolean checkIfRealPerson(Candidate candidate) {
 
-        KPSPublicSoapProxy client = new KPSPublicSoapProxy();
+		KPSPublicSoapProxy client = new KPSPublicSoapProxy();
 
-        boolean result = true;
+		boolean result = true;
 
-        try {
+		try {
 
-            result = client.TCKimlikNoDogrula(Long.parseLong(candidate.getNationalityId()), candidate.getFirstName().toUpperCase(new Locale("tr")), 
-                    candidate.getLastName().toUpperCase(new Locale("tr")), candidate.getBirthYear());
+			result = client.TCKimlikNoDogrula(Long.parseLong(candidate.getNationalityId()),
+					candidate.getFirstName().toUpperCase(new Locale("tr")),
+					candidate.getLastName().toUpperCase(new Locale("tr")), candidate.getBirthYear());
 
-        }
-        catch (RemoteException e) {
+		} catch (RemoteException e) {
 
-            e.printStackTrace();
-        }
+			e.printStackTrace();
+		}
 
-        return result;
-    }
+		return result;
+	}
 
 }
-
-

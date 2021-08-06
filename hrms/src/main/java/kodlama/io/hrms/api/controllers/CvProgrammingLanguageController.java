@@ -17,14 +17,13 @@ import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.CvProgrammingLanguage;
 import kodlama.io.hrms.entities.concretes.dto.CvProgrammingLanguageDto;
 
-
 @RestController
 @RequestMapping("/api/programmingLanguage")
 @CrossOrigin
 public class CvProgrammingLanguageController {
-	
+
 	private CvProgrammingLanguageService cvProgrammingLanguageService;
-	
+
 	@Autowired
 	public CvProgrammingLanguageController(CvProgrammingLanguageService cvProgrammingLanguageService) {
 		super();
@@ -33,34 +32,34 @@ public class CvProgrammingLanguageController {
 
 	@PostMapping("/add")
 	public Result add(@RequestBody CvProgrammingLanguageDto cvProgrammingLanguageDto) {
-		
+
 		return this.cvProgrammingLanguageService.add(cvProgrammingLanguageDto);
-	
+
 	}
-	
+
 	@PostMapping("/update")
 	public Result update(@RequestBody CvProgrammingLanguageDto cvProgrammingLanguageDto, int id) {
-		
+
 		return this.cvProgrammingLanguageService.update(cvProgrammingLanguageDto, id);
 	}
-	
+
 	@PostMapping("/delete")
 	public Result remove(@RequestParam("id") int id) {
-		
+
 		return this.cvProgrammingLanguageService.remove(id);
 	}
-	
+
 	@GetMapping("/getAllByCv")
 	public DataResult<List<CvProgrammingLanguage>> getAllByCv_CvId(int cvId) {
 
 		return this.cvProgrammingLanguageService.getAllByCv_CvId(cvId);
 	}
-	
+
 	@GetMapping("/getById")
 	public Result getById(@RequestParam int id) {
-		
+
 		return this.cvProgrammingLanguageService.getById(id);
-		
+
 	}
 
 }

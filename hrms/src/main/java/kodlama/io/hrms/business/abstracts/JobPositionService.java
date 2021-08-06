@@ -7,11 +7,11 @@ import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.JobPosition;
 
 public interface JobPositionService {
-	
-	DataResult <List<JobPosition>> getAll();
-	
+
+	DataResult<List<JobPosition>> getAll();
+
 	Result add(JobPosition job);
-	
-	DataResult <JobPosition> getById(int id);
+
+	DataResult<JobPosition> getById(int id);
 
 }

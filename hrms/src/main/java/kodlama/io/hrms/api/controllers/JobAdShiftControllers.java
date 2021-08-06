@@ -24,10 +24,10 @@ public class JobAdShiftControllers {
 		super();
 		this.jobAdShiftService = jobAdShiftService;
 	}
-	
+
 	@GetMapping("/getAll")
-	DataResult<List<JobAdShift>> getAll(){
-		
+	DataResult<List<JobAdShift>> getAll() {
+
 		return this.jobAdShiftService.getAll();
 	}
 }

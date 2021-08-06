@@ -1,7 +1,5 @@
 package kodlama.io.hrms.business.cvmanagers;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +15,11 @@ import kodlama.io.hrms.dataAccess.abstracts.CvSchoolDao;
 import kodlama.io.hrms.entities.concretes.CvSchool;
 import kodlama.io.hrms.entities.concretes.dto.CvSchoolDto;
 
-
 @Service
 public class CvSchoolManager implements CvSchoolService {
-	
-	
+
 	CvSchoolDao cvSchoolDao;
 	CvService cvService;
-
-	
 
 	@Autowired
 	public CvSchoolManager(CvSchoolDao cvSchoolDao, CvService cvService) {
@@ -36,18 +30,17 @@ public class CvSchoolManager implements CvSchoolService {
 
 	@Override
 	public Result add(CvSchoolDto cvSchoolDto) {
-		
+
 		CvSchool cvSchoolAdd = new CvSchool();
-		
+
 		cvSchoolAdd.setCvSchoolBranch(cvSchoolDto.getCvSchoolBranch());
 		cvSchoolAdd.setCvSchoolGraduateDate(cvSchoolDto.getCvSchoolGraduateDate());
 		cvSchoolAdd.setCvSchoolName(cvSchoolDto.getCvSchoolName());
 		cvSchoolAdd.setCvSchoolStartDate(cvSchoolDto.getCvSchoolStartDate());
 		cvSchoolAdd.setCv(cvService.getById(cvSchoolDto.getCvId()).getData());
-		
+
 		cvSchoolDao.save(cvSchoolAdd);
-	
-		
+
 		return new SuccessResult("Okul bilgileri eklendi");
 	}
 
@@ -58,8 +51,7 @@ public class CvSchoolManager implements CvSchoolService {
 		cvSchoolUpdate.setCvSchoolGraduateDate(cvSchoolDto.getCvSchoolGraduateDate());
 		cvSchoolUpdate.setCvSchoolName(cvSchoolDto.getCvSchoolName());
 		cvSchoolUpdate.setCvSchoolStartDate(cvSchoolDto.getCvSchoolStartDate());
-		
-		
+
 		cvSchoolDao.save(cvSchoolUpdate);
 		return new SuccessResult("Okul bilgileri güncellendi");
 	}
@@ -72,16 +64,17 @@ public class CvSchoolManager implements CvSchoolService {
 
 	@Override
 	public DataResult<List<CvSchool>> getAllByCv_CvIdOrderByCvSchoolGraduateDate(int cvId) {
-		
-		return new SuccessDataResult<List<CvSchool>>(this.cvSchoolDao.getAllByCv_CvIdOrderByCvSchoolGraduateDate(cvId), "");
-		
+
+		return new SuccessDataResult<List<CvSchool>>(this.cvSchoolDao.getAllByCv_CvIdOrderByCvSchoolGraduateDate(cvId),
+				"");
+
 	}
 
 	@Override
 	public DataResult<List<CvSchool>> getAllByCv_CvId(int cvId) {
-		
+
 		return new SuccessDataResult<List<CvSchool>>(this.cvSchoolDao.getAllByCv_CvId(cvId), "");
-	
+
 	}
 
 	@Override
@@ -95,20 +88,5 @@ public class CvSchoolManager implements CvSchoolService {
 		CvSchool cvSchool = cvSchoolDao.findById(id);
 		return new SuccessDataResult<CvSchool>(cvSchool);
 	}
-
-
-
-	
-
-	
-
-	
-	
-	
-
-	
-	
-	
-	
 
 }

@@ -17,7 +17,6 @@ import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.CvDetails;
 import kodlama.io.hrms.entities.concretes.dto.CvDetailsDto;
 
-
 @RestController
 @RequestMapping("/api/cvDetails")
 @CrossOrigin
@@ -39,7 +38,7 @@ public class CvDetailsController {
 	}
 
 	@PostMapping("/update")
-	public Result update(@RequestBody CvDetailsDto cvDetailsDto,int id) {
+	public Result update(@RequestBody CvDetailsDto cvDetailsDto, int id) {
 
 		return this.cvDetailsService.update(cvDetailsDto, id);
 	}
@@ -50,15 +49,13 @@ public class CvDetailsController {
 		return this.cvDetailsService.remove(id);
 
 	}
-	
+
 	@GetMapping("/getById")
 	public Result getById(@RequestParam int id) {
-		
+
 		return this.cvDetailsService.getById(id);
-		
+
 	}
-	
-	
 
 	@GetMapping("/getAllByCv")
 	public DataResult<List<CvDetails>> getAllByCv_CvId(int cvId) {

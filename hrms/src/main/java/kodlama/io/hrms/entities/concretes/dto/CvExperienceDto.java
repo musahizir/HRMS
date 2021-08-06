@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CvExperienceDto {
-	
+
 	private int cvId;
-	
+
 	private String cvExperienceCompanyName;
-	
+
 	private LocalDate cvExperienceStartDate;
-	
+
 	private LocalDate cvExperienceLeaveDate;
-	
+
 	private String cvExperiencePosition;
 
 }

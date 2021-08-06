@@ -8,18 +8,17 @@ import kodlama.io.hrms.entities.concretes.CvLink;
 import kodlama.io.hrms.entities.concretes.dto.CvLinkDto;
 
 public interface CvLinkService {
-	
 
 	Result add(CvLinkDto cvLinkDto);
-	
+
 	Result update(CvLinkDto cvLinkDto, int id);
-	
+
 	Result remove(int id);
-	
+
 	DataResult<List<CvLink>> getAllByCv_CvId(int cvId);
-	
+
 	Result addAll(List<CvLink> cvLink);
-	
-	DataResult <CvLink> getById(int id);
+
+	DataResult<CvLink> getById(int id);
 
 }

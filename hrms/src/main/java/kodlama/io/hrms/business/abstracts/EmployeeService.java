@@ -8,14 +8,14 @@ import kodlama.io.hrms.entities.concretes.Employee;
 
 public interface EmployeeService {
 
-	public DataResult <List<Employee>> getAll();
-	
+	public DataResult<List<Employee>> getAll();
+
 	Result add(Employee employee);
-	
-	Result update(Employee employee, int id );
-	
+
+	Result update(Employee employee, int id);
+
 	Result delete(int employeeId);
-	
-	DataResult <Employee> getById(int id);
-	
+
+	DataResult<Employee> getById(int id);
+
 }

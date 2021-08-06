@@ -16,7 +16,7 @@ import kodlama.io.hrms.entities.concretes.City;
 @RequestMapping("/api/city")
 @CrossOrigin
 public class CityController {
-	
+
 	private CityService cityService;
 
 	@Autowired
@@ -24,14 +24,13 @@ public class CityController {
 		super();
 		this.cityService = cityService;
 	}
-	
+
 	@GetMapping("/getall")
-	
-	public DataResult<List<City>> getAll(){
-		
+
+	public DataResult<List<City>> getAll() {
+
 		return this.cityService.getAll();
-		
-		
+
 	}
 
 }

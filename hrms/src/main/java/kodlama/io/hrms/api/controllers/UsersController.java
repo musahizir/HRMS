@@ -13,18 +13,17 @@ import kodlama.io.hrms.entities.concretes.User;
 @RequestMapping("/api/users")
 @RestController
 public class UsersController {
-	
+
 	private UserService<User> userService;
+
 	public UsersController(UserService<User> userService) {
 		super();
 		this.userService = userService;
 	}
 
-
-	
 	@GetMapping("/getall")
-	public DataResult <List<User>> getAll(){
-		
+	public DataResult<List<User>> getAll() {
+
 		return this.userService.getAll();
 	}
 

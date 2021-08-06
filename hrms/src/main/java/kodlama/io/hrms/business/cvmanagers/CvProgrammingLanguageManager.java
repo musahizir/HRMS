@@ -16,11 +16,11 @@ import kodlama.io.hrms.entities.concretes.CvProgrammingLanguage;
 import kodlama.io.hrms.entities.concretes.dto.CvProgrammingLanguageDto;
 
 @Service
-public class CvProgrammingLanguageManager implements CvProgrammingLanguageService{
+public class CvProgrammingLanguageManager implements CvProgrammingLanguageService {
 
 	private CvProgrammingLanguageDao cvProgrammingLanguageDao;
 	private CvService cvService;
-	
+
 	@Autowired
 	public CvProgrammingLanguageManager(CvProgrammingLanguageDao cvProgrammingLanguageDao, CvService cvService) {
 		super();
@@ -30,24 +30,27 @@ public class CvProgrammingLanguageManager implements CvProgrammingLanguageServic
 
 	@Override
 	public Result add(CvProgrammingLanguageDto cvProgrammingLanguageDto) {
-		
+
 		CvProgrammingLanguage cvProgrammingLanguageAdd = new CvProgrammingLanguage();
-		
+
 		cvProgrammingLanguageAdd.setCvProgrammingLanguageName(cvProgrammingLanguageDto.getCvProgrammingLanguageName());
-		cvProgrammingLanguageAdd.setCvProgrammingLanguageLevel(cvProgrammingLanguageDto.getCvProgrammingLanguageLevel());
+		cvProgrammingLanguageAdd
+				.setCvProgrammingLanguageLevel(cvProgrammingLanguageDto.getCvProgrammingLanguageLevel());
 		cvProgrammingLanguageAdd.setCv(cvService.getById(cvProgrammingLanguageDto.getCvId()).getData());
-		
+
 		cvProgrammingLanguageDao.save(cvProgrammingLanguageAdd);
-		
+
 		return new SuccessResult("Programlama dilleri eklendi");
 	}
 
 	@Override
 	public Result update(CvProgrammingLanguageDto cvProgrammingLanguageDto, int id) {
 		CvProgrammingLanguage cvProgrammingLanguageUpdate = cvProgrammingLanguageDao.getOne(id);
-		cvProgrammingLanguageUpdate.setCvProgrammingLanguageLevel(cvProgrammingLanguageDto.getCvProgrammingLanguageLevel());
-		cvProgrammingLanguageUpdate.setCvProgrammingLanguageName(cvProgrammingLanguageDto.getCvProgrammingLanguageName());
-		
+		cvProgrammingLanguageUpdate
+				.setCvProgrammingLanguageLevel(cvProgrammingLanguageDto.getCvProgrammingLanguageLevel());
+		cvProgrammingLanguageUpdate
+				.setCvProgrammingLanguageName(cvProgrammingLanguageDto.getCvProgrammingLanguageName());
+
 		cvProgrammingLanguageDao.save(cvProgrammingLanguageUpdate);
 		return new SuccessResult("Programlama dilleri güncellendi");
 	}
@@ -60,9 +63,10 @@ public class CvProgrammingLanguageManager implements CvProgrammingLanguageServic
 
 	@Override
 	public DataResult<List<CvProgrammingLanguage>> getAllByCv_CvId(int cvId) {
-		
-		return new SuccessDataResult<List<CvProgrammingLanguage>>(this.cvProgrammingLanguageDao.getAllByCv_CvId(cvId), "");
-	
+
+		return new SuccessDataResult<List<CvProgrammingLanguage>>(this.cvProgrammingLanguageDao.getAllByCv_CvId(cvId),
+				"");
+
 	}
 
 	@Override
@@ -76,7 +80,5 @@ public class CvProgrammingLanguageManager implements CvProgrammingLanguageServic
 		CvProgrammingLanguage cvProgrammingLanguage = cvProgrammingLanguageDao.findById(id);
 		return new SuccessDataResult<CvProgrammingLanguage>(cvProgrammingLanguage);
 	}
-	
-
 
 }

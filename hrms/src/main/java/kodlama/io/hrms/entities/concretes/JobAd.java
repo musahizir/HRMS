@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "job_ad")
-@JsonIgnoreProperties ({"hibernateLazyInitializer","handler","favoriteJobAd"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "favoriteJobAd" })
 public class JobAd {
 
 	@Id
@@ -46,19 +46,19 @@ public class JobAd {
 
 	@Column(name = "job_ad_max_open_position")
 	private int jobAdMaxOpenPosition;
-	
-	@Column(name="job_ad_is_active")
+
+	@Column(name = "job_ad_is_active")
 	private boolean jobAdIsActive;
-	
-	@Column(name="job_ad_is_confirmed")
+
+	@Column(name = "job_ad_is_confirmed")
 	private boolean jobAdIsConfirmed;
-	
-	@Column(name="job_ad_posted_date")
+
+	@Column(name = "job_ad_posted_date")
 	private LocalDate jobAdPostedDate;
-	
-	@Column(name="job_ad_confirm_request")
+
+	@Column(name = "job_ad_confirm_request")
 	private boolean jobAdConfirmRequest;
-	
+
 	@ManyToOne()
 	@JoinColumn(name = "job_title_id")
 	private JobPosition jobPosition;
@@ -68,19 +68,18 @@ public class JobAd {
 	private City city;
 
 	@ManyToOne()
-	@JoinColumn(name= "employer_id")
+	@JoinColumn(name = "employer_id")
 	private Employer employer;
-	
-	@ManyToOne()
-	@JoinColumn(name= "job_ad_shift_id")
-	private JobAdShift jobAdShift;
-	
-	@ManyToOne()
-	@JoinColumn(name= "job_ad_working_style_id")
-	private JobAdWorkingStyle jobAdWorkingStyle;
-	
-	@OneToMany(mappedBy = "jobAd")
-	private List<FavoriteJobAd> favoriteJobAd ;
 
-	
+	@ManyToOne()
+	@JoinColumn(name = "job_ad_shift_id")
+	private JobAdShift jobAdShift;
+
+	@ManyToOne()
+	@JoinColumn(name = "job_ad_working_style_id")
+	private JobAdWorkingStyle jobAdWorkingStyle;
+
+	@OneToMany(mappedBy = "jobAd")
+	private List<FavoriteJobAd> favoriteJobAd;
+
 }

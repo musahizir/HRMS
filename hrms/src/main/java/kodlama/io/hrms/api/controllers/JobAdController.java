@@ -1,6 +1,5 @@
 package kodlama.io.hrms.api.controllers;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,7 @@ import kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto;
 @RequestMapping("/api/jobad")
 @CrossOrigin
 public class JobAdController {
-	
-	
+
 	private JobAdService jobAdService;
 
 	@Autowired
@@ -35,90 +33,79 @@ public class JobAdController {
 
 	@PostMapping("/add")
 	public Result add(@RequestBody JobAdRegisterDto jobAdRegisterDto) {
-		
+
 		return this.jobAdService.add(jobAdRegisterDto);
-		
+
 	}
-	
+
 	@PostMapping("/remove")
 	public Result remove(int id) {
-		
+
 		return this.jobAdService.remove(id);
 	}
-	
+
 	@PostMapping("/changeActiveToPassive")
 	public Result changeActiveToPassive(int id) {
 		return this.jobAdService.changeActiveToPassive(id);
-		
-	
+
 	}
-	
+
 	@PostMapping("/changePassiveToActive")
 	public Result changePassiveToActive(int id) {
 		return this.jobAdService.changePassiveToActive(id);
-		
-	
+
 	}
-	
-	
+
 	@PostMapping("/changeConfirmedFalseToTrue")
-	
+
 	public Result changeConfirmedFalseToTrue(int id) {
-		
+
 		return this.jobAdService.changeConfirmedFalseToTrue(id);
 	}
-    
+
 	@PostMapping("/getAllPageNumberAndPageSizeAndFilter")
-	public Result getAllPageNumberAndPageSizeAndFilter(@RequestParam int pageNo, int pageSize, @RequestBody
-			JobAdFilterDto jobAdFilterDto) {
-		
+	public Result getAllPageNumberAndPageSizeAndFilter(@RequestParam int pageNo, int pageSize,
+			@RequestBody JobAdFilterDto jobAdFilterDto) {
+
 		return this.jobAdService.getAllPageNumberAndPageSizeAndFilter(pageNo, pageSize, jobAdFilterDto);
 	}
-	
 
 	@PostMapping("/changeConfirmRequestTrueToFalse")
-	
+
 	public Result changeConfirmRequestTrueToFalse(int id) {
-		
+
 		return this.jobAdService.changeConfirmRequestTrueToFalse(id);
 	}
-	
+
 	@GetMapping("/findByjobAdIsActiveTrue")
-	public DataResult<List<JobAd>> findByjobAdIsActiveTrue(){
-		
+	public DataResult<List<JobAd>> findByjobAdIsActiveTrue() {
+
 		return this.jobAdService.findByjobAdIsActiveTrue();
-		
+
 	}
-	
+
 	@GetMapping("/findByOrderByJobAdPostedDate")
-	DataResult<List<JobAd>> findByOrderByJobAdPostedDate(){
+	DataResult<List<JobAd>> findByOrderByJobAdPostedDate() {
 		return this.jobAdService.findByOrderByJobAdPostedDate();
-	
+
 	}
-	
+
 	@GetMapping("/getAllActiveJobAdByEmployer")
-	DataResult<List<JobAd>> getAllActiveJobAdByEmployer(int id){
+	DataResult<List<JobAd>> getAllActiveJobAdByEmployer(int id) {
 		return this.jobAdService.getAllActiveJobAdByEmployer(id);
-		
-		
+
 	}
-	
+
 	@GetMapping("/getAllByJobAdIsConfirmedFalse")
-	DataResult<List<JobAd>> getAllByJobAdIsConfirmedFalse(){
-		
+	DataResult<List<JobAd>> getAllByJobAdIsConfirmedFalse() {
+
 		return this.jobAdService.getAllByJobAdIsConfirmedFalse();
 	}
-	
-	
-	
+
 	@PostMapping("/getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue")
-	DataResult<List<JobAd>> getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue(){
-		
+	DataResult<List<JobAd>> getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue() {
+
 		return this.jobAdService.getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue();
 	}
-	
-	
-	
-	
-	
+
 }

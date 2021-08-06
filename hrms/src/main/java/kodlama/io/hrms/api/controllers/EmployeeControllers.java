@@ -52,12 +52,12 @@ public class EmployeeControllers {
 
 		return this.employeeService.delete(employeeId);
 	}
-	
+
 	@GetMapping("/getById")
 	public Result getById(@RequestParam int id) {
-		
+
 		return this.employeeService.getById(id);
-		
+
 	}
 
 }

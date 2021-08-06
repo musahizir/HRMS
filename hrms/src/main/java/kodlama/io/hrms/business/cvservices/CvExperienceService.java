@@ -18,8 +18,8 @@ public interface CvExperienceService {
 	DataResult<List<CvExperience>> getAllByCv_CvIdOrderByCvExperienceLeaveDateDesc(int cvId);
 
 	DataResult<List<CvExperience>> getAllByCv_CvId(int cvId);
-	
+
 	Result addAll(List<CvExperience> cvExperience);
-	
+
 	DataResult<CvExperience> getById(int id);
 }

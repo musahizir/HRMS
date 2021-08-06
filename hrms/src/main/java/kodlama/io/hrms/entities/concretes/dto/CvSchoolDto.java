@@ -12,14 +12,13 @@ import lombok.NoArgsConstructor;
 public class CvSchoolDto {
 
 	private int cvId;
-	
+
 	private LocalDate cvSchoolStartDate;
-	
+
 	private LocalDate cvSchoolGraduateDate;
-	
+
 	private String cvSchoolBranch;
-	
+
 	private String cvSchoolName;
-		
 
 }

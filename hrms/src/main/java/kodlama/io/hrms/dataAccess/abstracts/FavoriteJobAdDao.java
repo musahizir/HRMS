@@ -9,6 +9,5 @@ import kodlama.io.hrms.entities.concretes.FavoriteJobAd;
 public interface FavoriteJobAdDao extends JpaRepository<FavoriteJobAd, Integer> {
 
 	List<FavoriteJobAd> getByCandidateId(int id);
-	
-	
+
 }

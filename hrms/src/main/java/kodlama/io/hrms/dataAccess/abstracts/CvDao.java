@@ -9,8 +9,8 @@ import kodlama.io.hrms.entities.concretes.Cv;
 public interface CvDao extends JpaRepository<Cv, Integer> {
 
 	Cv findById(int id);
-	
+
 	List<Cv> getAllBycvId(int id);
-	
+
 	List<Cv> getAllByCandidateId(int id);
 }

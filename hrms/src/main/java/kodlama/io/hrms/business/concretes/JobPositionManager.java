@@ -42,8 +42,7 @@ public class JobPositionManager implements JobPositionService {
 
 			this.jobDao.save(job);
 			return new SuccessResult("İş pozisyonu eklendi");
-			
-			
+
 		}
 		return new ErrorResult("İş pozisyonu eklenemedi");
 
@@ -52,9 +51,10 @@ public class JobPositionManager implements JobPositionService {
 	@Override
 	public DataResult<JobPosition> getById(int id) {
 		JobPosition jobPosition = jobDao.findById(id);
-		
-		if(jobPosition == null) return new ErrorDataResult<JobPosition>();
-		
+
+		if (jobPosition == null)
+			return new ErrorDataResult<JobPosition>();
+
 		return new SuccessDataResult<JobPosition>(jobPosition);
 	}
 }

@@ -16,9 +16,8 @@ import kodlama.io.hrms.entities.concretes.User;
 @Service
 public class UserManager<T extends User> implements UserService<T> {
 
-	
 	private UserDao<T> userDao;
-	
+
 	@Autowired
 	public UserManager(UserDao<T> userDao) {
 		super();
@@ -27,26 +26,25 @@ public class UserManager<T extends User> implements UserService<T> {
 
 	@Override
 	public DataResult<List<T>> getAll() {
-		
+
 		return new SuccessDataResult<List<T>>(userDao.findAll(), "");
-				
-		
+
 	}
 
 	@Override
 	public Result add(T t) {
-	
+
 		this.userDao.save(t);
 		return new SuccessDataResult<T>("Kullanıcı eklendi");
 	}
-	
+
 	public Result isEmailExist(String email) {
-		
-		if(userDao.findByEmail(email).isPresent()) {
-			
+
+		if (userDao.findByEmail(email).isPresent()) {
+
 			return new ErrorResult("Bu e-mail bulunmaktadır");
 		}
-		
+
 		return new SuccessResult();
 	}
 

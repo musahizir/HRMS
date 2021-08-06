@@ -5,10 +5,9 @@ import java.util.List;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.entities.concretes.JobAdShift;
 
-
 public interface JobAdShiftService {
 
 	DataResult<List<JobAdShift>> getAll();
-	
+
 	DataResult<JobAdShift> getById(int id);
 }

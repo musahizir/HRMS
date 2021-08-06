@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import kodlama.io.hrms.business.cvservices.CvService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
-import kodlama.io.hrms.entities.concretes.City;
 import kodlama.io.hrms.entities.concretes.Cv;
 import kodlama.io.hrms.entities.concretes.dto.CvAddDto;
 import kodlama.io.hrms.entities.concretes.dto.CvDetailsDto;
-import kodlama.io.hrms.entities.concretes.dto.CvDto;
-
 
 @RestController
 @RequestMapping("/api/cvController")
@@ -34,37 +31,30 @@ public class CvController {
 		this.cvService = cvService;
 	}
 
-
-	
-	
-
 	@PostMapping("/addx")
 	Result addx(@RequestBody Cv cv) {
 
 		return this.cvService.addx(cv);
 	}
+
 	@PostMapping("/add")
-	Result add(@RequestBody CvAddDto cvAddDto){
+	Result add(@RequestBody CvAddDto cvAddDto) {
 
 		return this.cvService.add(cvAddDto);
 	}
 
-	
 	@PostMapping("/cvDetailsAdd")
-	Result cvDetailsAdd( @RequestBody CvDetailsDto cvDetailsDto) {
-	
-	
-		return this.cvService.cvDetailsAdd( cvDetailsDto);
+	Result cvDetailsAdd(@RequestBody CvDetailsDto cvDetailsDto) {
+
+		return this.cvService.cvDetailsAdd(cvDetailsDto);
 	}
-	
-	
-    @GetMapping("/getAllByCandidateId")
-	
-	public DataResult<List<Cv>> getAllByCandidateId(@RequestParam int id){
-		
+
+	@GetMapping("/getAllByCandidateId")
+
+	public DataResult<List<Cv>> getAllByCandidateId(@RequestParam int id) {
+
 		return this.cvService.getAllByCandidateId(id);
-		
-		
+
 	}
 
 }

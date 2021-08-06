@@ -14,8 +14,7 @@ import kodlama.io.hrms.entities.concretes.JobPosition;
 public class JobPositionValidationManager implements JobPositionValidationService {
 
 	private JobPositionDao jobDao;
-	
-	
+
 	@Autowired
 	public JobPositionValidationManager(JobPositionDao jobDao) {
 		super();
@@ -24,26 +23,26 @@ public class JobPositionValidationManager implements JobPositionValidationServic
 
 	@Override
 	public Result validateJob(JobPosition job) {
-		
+
 		Result result = BusinessRules.Run(jobNameExist(job));
-		
-		if(result.isSuccess()) {
-			
+
+		if (result.isSuccess()) {
+
 			return new SuccessResult();
 		}
 		return new ErrorResult();
 	}
-	
+
 	private Result jobNameExist(JobPosition job) {
-		
-		if(jobDao.findByJobName(job.getJobName()) != null ) {
-			
+
+		if (jobDao.findByJobName(job.getJobName()) != null) {
+
 			System.out.println("Bu iş bulunmaktadır");
 			return new ErrorResult();
 		}
-		
+
 		return new SuccessResult();
-		
+
 	}
 
 }

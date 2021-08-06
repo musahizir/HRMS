@@ -21,8 +21,6 @@ public class CvLanguageManager implements CvLanguageService {
 	private CvLanguageDao cvLanguageDao;
 	private CvService cvService;
 
-
-
 	@Autowired
 	public CvLanguageManager(CvLanguageDao cvLanguageDao, CvService cvService) {
 		super();
@@ -32,27 +30,26 @@ public class CvLanguageManager implements CvLanguageService {
 
 	@Override
 	public Result add(CvLanguageDto cvLanguageDto) {
-		
+
 		CvLanguage cvLanguageAdd = new CvLanguage();
-		
+
 		cvLanguageAdd.setCvLanguageLevel(cvLanguageDto.getCvLanguageLevel());
 		cvLanguageAdd.setCvLanguageName(cvLanguageDto.getCvLanguageName());
 		cvLanguageAdd.setCv(cvService.getById(cvLanguageDto.getCvId()).getData());
-		
+
 		cvLanguageDao.save(cvLanguageAdd);
-		
-		
+
 		return new SuccessResult("Dil eklendi");
 	}
 
 	@Override
 	public Result update(CvLanguageDto cvLanguageDto, int id) {
-		
+
 		CvLanguage cvLanguageUpdate = cvLanguageDao.getOne(id);
-		
+
 		cvLanguageUpdate.setCvLanguageLevel(cvLanguageDto.getCvLanguageLevel());
 		cvLanguageUpdate.setCvLanguageName(cvLanguageDto.getCvLanguageName());
-		
+
 		cvLanguageDao.save(cvLanguageUpdate);
 		return new SuccessResult("Dil güncellendi");
 	}
@@ -67,7 +64,7 @@ public class CvLanguageManager implements CvLanguageService {
 	public DataResult<List<CvLanguage>> getAllByCv_CvId(int cvId) {
 
 		return new SuccessDataResult<List<CvLanguage>>(this.cvLanguageDao.getAllByCv_CvId(cvId), "");
-		
+
 	}
 
 	@Override
@@ -81,7 +78,7 @@ public class CvLanguageManager implements CvLanguageService {
 
 	@Override
 	public DataResult<CvLanguage> getById(int id) {
-		CvLanguage cvLanguage =cvLanguageDao.findById(id);
+		CvLanguage cvLanguage = cvLanguageDao.findById(id);
 		return new SuccessDataResult<CvLanguage>(cvLanguage);
 	}
 

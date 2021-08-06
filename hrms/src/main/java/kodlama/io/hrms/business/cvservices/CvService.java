@@ -1,6 +1,5 @@
 package kodlama.io.hrms.business.cvservices;
 
-
 import java.util.List;
 
 import kodlama.io.hrms.core.utilities.results.DataResult;
@@ -10,26 +9,20 @@ import kodlama.io.hrms.entities.concretes.dto.CvAddDto;
 import kodlama.io.hrms.entities.concretes.dto.CvDetailsDto;
 import kodlama.io.hrms.entities.concretes.dto.CvDto;
 
-
 public interface CvService {
 
-	 Result add(CvDto cvDto,int candidateId);
-	 
-	 Result addx(Cv cv);
-	 
-	 DataResult<Cv> getById(int id);
-	 
-	 Result add(CvAddDto cvAddDto);
-	
-	 
-	
+	Result add(CvDto cvDto, int candidateId);
 
-	DataResult <List<Cv>>getAllBycvId(int id);
+	Result addx(Cv cv);
 
-	DataResult<List<Cv>>getAllByCandidateId(int id);
+	DataResult<Cv> getById(int id);
 
-	
-	
-	Result cvDetailsAdd( CvDetailsDto cvDetailsDto);
-	
+	Result add(CvAddDto cvAddDto);
+
+	DataResult<List<Cv>> getAllBycvId(int id);
+
+	DataResult<List<Cv>> getAllByCandidateId(int id);
+
+	Result cvDetailsAdd(CvDetailsDto cvDetailsDto);
+
 }

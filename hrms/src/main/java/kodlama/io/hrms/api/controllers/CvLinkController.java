@@ -23,7 +23,7 @@ import kodlama.io.hrms.entities.concretes.dto.CvLinkDto;
 public class CvLinkController {
 
 	private CvLinkService cvLinkService;
-	
+
 	@Autowired
 	public CvLinkController(CvLinkService cvLinkService) {
 		super();
@@ -32,33 +32,33 @@ public class CvLinkController {
 
 	@PostMapping("/add")
 	public Result add(@RequestBody CvLinkDto cvLinkDto) {
-		
+
 		return this.cvLinkService.add(cvLinkDto);
-	
+
 	}
-	
+
 	@PostMapping("/update")
 	public Result update(@RequestBody CvLinkDto cvLinkDto, int id) {
-		
+
 		return this.cvLinkService.update(cvLinkDto, id);
 	}
-	
+
 	@PostMapping("/delete")
 	public Result remove(@RequestParam("id") int id) {
-		
+
 		return this.cvLinkService.remove(id);
 	}
-	
+
 	@GetMapping("/getAllByCv")
 	public DataResult<List<CvLink>> getAllBgetAllByCv_CvIdyCvId(int cvId) {
 
 		return this.cvLinkService.getAllByCv_CvId(cvId);
 	}
-	
+
 	@GetMapping("/getById")
 	public Result getById(@RequestParam int id) {
-		
+
 		return this.cvLinkService.getById(id);
-		
+
 	}
 }

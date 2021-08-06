@@ -1,7 +1,5 @@
 package kodlama.io.hrms.business.concretes;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,23 +28,21 @@ public class EmployerManager extends UserManager<Employer> implements EmployerSe
 		this.employerValidationManager = employerValidationManager;
 	}
 
-	
-
 	@Override
 	public Result add(Employer employer) {
 
-		Result result = BusinessRules.Run(employerValidationManager.validateEmployer(employer),super.isEmailExist(employer.getEmail()));
-		
+		Result result = BusinessRules.Run(employerValidationManager.validateEmployer(employer),
+				super.isEmailExist(employer.getEmail()));
+
 		if (!result.isSuccess()) {
 
-			if (!emailValidate(employer).isSuccess() || !hrmsConfirmation(employer).isSuccess() ) {
+			if (!emailValidate(employer).isSuccess() || !hrmsConfirmation(employer).isSuccess()) {
 
 			}
 
 			return result;
 		}
 
-	
 		return new SuccessDataResult<Employer>(this.employerDao.save(employer), "İş veren eklendi");
 	}
 
@@ -62,13 +58,12 @@ public class EmployerManager extends UserManager<Employer> implements EmployerSe
 		return new SuccessResult();
 	}
 
-
-
 	@Override
 	public DataResult<Employer> getById(int id) {
 		Employer employer = employerDao.findById(id);
-		if(employer == null) return new ErrorDataResult<Employer>();
-		
+		if (employer == null)
+			return new ErrorDataResult<Employer>();
+
 		return new SuccessDataResult<Employer>(employer);
 	}
 

@@ -16,29 +16,25 @@ import kodlama.io.hrms.entities.concretes.JobAdWorkingStyle;
 public class JobAdWorkingStyleManager implements JobAdWorkingStyleService {
 
 	private JobAdWorkingStyleDao jobAdWorkingStyleDao;
-	
+
 	@Autowired
 	public JobAdWorkingStyleManager(JobAdWorkingStyleDao jobAdWorkingStyleDao) {
 		super();
 		this.jobAdWorkingStyleDao = jobAdWorkingStyleDao;
 	}
 
-	
 	@Override
 	public DataResult<List<JobAdWorkingStyle>> getAll() {
-		
+
 		return new SuccessDataResult<List<JobAdWorkingStyle>>(this.jobAdWorkingStyleDao.findAll());
 	}
-
 
 	@Override
 	public DataResult<JobAdWorkingStyle> getById(int id) {
 		JobAdWorkingStyle jobAdWorkingStyle = jobAdWorkingStyleDao.findById(id);
-		if(jobAdWorkingStyle == null) 
+		if (jobAdWorkingStyle == null)
 			return new ErrorDataResult<JobAdWorkingStyle>();
 		return new SuccessDataResult<JobAdWorkingStyle>(jobAdWorkingStyle);
 	}
 
-
-	
 }

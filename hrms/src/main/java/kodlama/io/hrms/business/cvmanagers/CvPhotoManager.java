@@ -1,20 +1,10 @@
 package kodlama.io.hrms.business.cvmanagers;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import kodlama.io.hrms.business.cvservices.CvPhotoService;
-import kodlama.io.hrms.core.utilities.photo.PhotoService;
-import kodlama.io.hrms.core.utilities.results.DataResult;
-import kodlama.io.hrms.core.utilities.results.Result;
-import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
-import kodlama.io.hrms.core.utilities.results.SuccessResult;
-import kodlama.io.hrms.dataAccess.abstracts.CvPhotoDao;
-import kodlama.io.hrms.entities.concretes.CvPhoto;
+
 
 @Service
 public class CvPhotoManager implements CvPhotoService {

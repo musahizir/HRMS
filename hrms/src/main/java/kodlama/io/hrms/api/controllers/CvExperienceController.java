@@ -21,10 +21,9 @@ import kodlama.io.hrms.entities.concretes.dto.CvExperienceDto;
 @RequestMapping("/api/cvExperience")
 @CrossOrigin
 public class CvExperienceController {
-	
-	
+
 	private CvExperienceService cvExperienceService;
-	
+
 	@Autowired
 	public CvExperienceController(CvExperienceService cvExperienceService) {
 		super();
@@ -33,40 +32,40 @@ public class CvExperienceController {
 
 	@PostMapping("/add")
 	public Result add(@RequestBody CvExperienceDto cvExperienceDto) {
-		
+
 		return this.cvExperienceService.add(cvExperienceDto);
-	
+
 	}
-	
+
 	@PostMapping("/update")
 	public Result update(@RequestBody CvExperienceDto cvExperienceDto, int id) {
-		
+
 		return this.cvExperienceService.update(cvExperienceDto, id);
 	}
-	
+
 	@PostMapping("/delete")
 	public Result remove(@RequestParam("id") int id) {
-		
+
 		return this.cvExperienceService.remove(id);
 	}
-	
+
 	@GetMapping("/getAllByCandidateIdOrderByCvExperienceLeaveDateDesc")
-	public DataResult<List<CvExperience>> getAllByCv_CvIdOrderByCvExperienceLeaveDateDesc(int cvId)  {
+	public DataResult<List<CvExperience>> getAllByCv_CvIdOrderByCvExperienceLeaveDateDesc(int cvId) {
 
 		return this.cvExperienceService.getAllByCv_CvIdOrderByCvExperienceLeaveDateDesc(cvId);
 	}
-	
+
 	@GetMapping("/getAllByCv")
 	public DataResult<List<CvExperience>> getAllByCv_CvId(int cvId) {
 
 		return this.cvExperienceService.getAllByCv_CvId(cvId);
 	}
-	
+
 	@GetMapping("/getById")
 	public Result getById(@RequestParam int id) {
-		
+
 		return this.cvExperienceService.getById(id);
-		
+
 	}
 
 }

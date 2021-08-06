@@ -16,12 +16,12 @@ import kodlama.io.hrms.entities.concretes.CvLink;
 import kodlama.io.hrms.entities.concretes.dto.CvLinkDto;
 
 @Service
-public class CvLinkManager implements CvLinkService{
+public class CvLinkManager implements CvLinkService {
 
-	
 	private CvLinkDao cvLinkDao;
 	private CvService cvService;
 
+	@Autowired
 	public CvLinkManager(CvLinkDao cvLinkDao, CvService cvService) {
 		super();
 		this.cvLinkDao = cvLinkDao;
@@ -30,12 +30,12 @@ public class CvLinkManager implements CvLinkService{
 
 	@Override
 	public Result add(CvLinkDto cvLinkDto) {
-		
+
 		CvLink cvLinkAdd = new CvLink();
 		cvLinkAdd.setLinkName(cvLinkDto.getLinkName());
 		cvLinkAdd.setCv(cvService.getById(cvLinkDto.getCvId()).getData());
 		cvLinkDao.save(cvLinkAdd);
-		
+
 		return new SuccessResult("Link eklendi");
 	}
 
@@ -43,7 +43,7 @@ public class CvLinkManager implements CvLinkService{
 	public Result update(CvLinkDto cvLinkDto, int id) {
 		CvLink cvLinkUpdate = cvLinkDao.getOne(id);
 		cvLinkUpdate.setLinkName(cvLinkDto.getLinkName());
-		
+
 		cvLinkDao.save(cvLinkUpdate);
 		return new SuccessResult("Link güncellendi");
 	}
@@ -56,9 +56,9 @@ public class CvLinkManager implements CvLinkService{
 
 	@Override
 	public DataResult<List<CvLink>> getAllByCv_CvId(int cvId) {
-		
+
 		return new SuccessDataResult<List<CvLink>>(this.cvLinkDao.getAllByCv_CvId(cvId), "");
-		
+
 	}
 
 	@Override
@@ -66,7 +66,6 @@ public class CvLinkManager implements CvLinkService{
 
 		this.cvLinkDao.saveAll(cvLink);
 
-		
 		return new SuccessResult();
 	}
 

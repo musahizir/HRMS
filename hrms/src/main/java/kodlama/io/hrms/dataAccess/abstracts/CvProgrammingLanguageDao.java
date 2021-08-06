@@ -6,10 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import kodlama.io.hrms.entities.concretes.CvProgrammingLanguage;
 
-
-public interface CvProgrammingLanguageDao extends JpaRepository<CvProgrammingLanguage, Integer>{
+public interface CvProgrammingLanguageDao extends JpaRepository<CvProgrammingLanguage, Integer> {
 
 	List<CvProgrammingLanguage> getAllByCv_CvId(int cvId);
-	
+
 	CvProgrammingLanguage findById(int id);
 }

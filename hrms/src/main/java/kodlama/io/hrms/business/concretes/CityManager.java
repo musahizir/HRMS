@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import kodlama.io.hrms.business.abstracts.CityService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
-import kodlama.io.hrms.core.utilities.results.ErrorResult;
 import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.dataAccess.abstracts.CityDao;
 import kodlama.io.hrms.entities.concretes.City;
@@ -16,29 +15,26 @@ import kodlama.io.hrms.entities.concretes.City;
 @Service
 public class CityManager implements CityService {
 
-	
 	private CityDao cityDao;
-	
+
 	@Autowired
 	public CityManager(CityDao cityDao) {
 		super();
 		this.cityDao = cityDao;
 	}
 
-
 	@Override
 	public DataResult<List<City>> getAll() {
-		
+
 		return new SuccessDataResult<List<City>>(this.cityDao.findAll(), "Şehirler listelendi");
 	}
-
 
 	@Override
 	public DataResult<City> getById(int id) {
 		City city = cityDao.findById(id);
-		if(city == null)
+		if (city == null)
 			return new ErrorDataResult<City>();
-		
+
 		return new SuccessDataResult<City>(city);
 	}
 

@@ -1,4 +1,4 @@
-	package kodlama.io.hrms.business.auth;
+package kodlama.io.hrms.business.auth;
 
 import org.springframework.stereotype.Component;
 
@@ -35,6 +35,5 @@ public class CandidateValidationManager extends UserValidationManager implements
 		}
 		return new SuccessResult();
 	}
-	
 
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlama.io.hrms.business.abstracts.CandidateService;
-import kodlama.io.hrms.business.abstracts.EmployerService;
 import kodlama.io.hrms.business.abstracts.FavoriteJobAdService;
 import kodlama.io.hrms.business.abstracts.JobAdService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
@@ -23,8 +22,7 @@ public class FavoriteJobAdManager implements FavoriteJobAdService {
 	private FavoriteJobAdDao favoriteJobAdDao;
 	private CandidateService candidateService;
 	private JobAdService jobAdService;
-	
-	
+
 	@Autowired
 	public FavoriteJobAdManager(FavoriteJobAdDao favoriteJobAdDao, CandidateService candidateService,
 			JobAdService jobAdService) {
@@ -34,39 +32,28 @@ public class FavoriteJobAdManager implements FavoriteJobAdService {
 		this.jobAdService = jobAdService;
 	}
 
-
-
-
 	@Override
 	public Result add(FavoriteJobAdDto favoriteJobAdDto) {
-		
+
 		FavoriteJobAd favAdd = new FavoriteJobAd();
-		
+
 		favAdd.setCandidate(candidateService.getById(favoriteJobAdDto.getId()).getData());
 		favAdd.setJobAd(jobAdService.getById(favoriteJobAdDto.getJobAdId()).getData());
-		
+
 		this.favoriteJobAdDao.save(favAdd);
-		
+
 		return new SuccessResult();
 	}
 
-
-
-
 	@Override
-	public DataResult <List<FavoriteJobAd>> getByCandidateId(int id) {
-		
-			
-		
+	public DataResult<List<FavoriteJobAd>> getByCandidateId(int id) {
+
 		return new SuccessDataResult<List<FavoriteJobAd>>(this.favoriteJobAdDao.getByCandidateId(id));
 	}
 
-
-
-
 	@Override
 	public DataResult<List<FavoriteJobAd>> getAll() {
-		
+
 		return new SuccessDataResult<List<FavoriteJobAd>>(this.favoriteJobAdDao.findAll());
 	}
 

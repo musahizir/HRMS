@@ -15,16 +15,11 @@ import kodlama.io.hrms.dataAccess.abstracts.CvDetailsDao;
 import kodlama.io.hrms.entities.concretes.CvDetails;
 import kodlama.io.hrms.entities.concretes.dto.CvDetailsDto;
 
-
 @Service
 public class CvDetailsManager implements CvDetailsService {
 
-	
 	private CvDetailsDao cvDetailsDao;
 	private CvService cvService;
-	
-	
-
 
 	@Autowired
 	public CvDetailsManager(CvDetailsDao cvDetailsDao, CvService cvService) {
@@ -33,32 +28,27 @@ public class CvDetailsManager implements CvDetailsService {
 		this.cvService = cvService;
 	}
 
-
 	@Override
 	public Result add(CvDetailsDto cvDetailsDto) {
-		
-		
+
 		CvDetails cvDetailsAdd = new CvDetails();
 
 		cvDetailsAdd.setCvDetailsField(cvDetailsDto.getCvDetailsField());
 		cvDetailsAdd.setCv(cvService.getById(cvDetailsDto.getCvId()).getData());
-		
+
 		cvDetailsDao.save(cvDetailsAdd);
-	    
-	  	
-	  
+
 		return new SuccessResult("Cv detayları eklendi");
 	}
 
-
 	@Override
 	public Result update(CvDetailsDto cvDetailsDto, int id) {
-		
+
 		CvDetails cvDetailsUpdate = cvDetailsDao.getOne(id);
-		
+
 		cvDetailsUpdate.setCvDetailsField(cvDetailsDto.getCvDetailsField());
 		cvDetailsDao.save(cvDetailsUpdate);
-		
+
 		return new SuccessResult("Cv detayları güncellendi");
 	}
 
@@ -70,10 +60,9 @@ public class CvDetailsManager implements CvDetailsService {
 
 	@Override
 	public DataResult<List<CvDetails>> getAllByCv_CvId(int cvId) {
-		
+
 		return new SuccessDataResult<List<CvDetails>>(this.cvDetailsDao.getAllByCv_CvId(cvId), "");
-		
-		
+
 	}
 
 	@Override
@@ -82,13 +71,10 @@ public class CvDetailsManager implements CvDetailsService {
 		return new SuccessResult();
 	}
 
-
 	@Override
 	public DataResult<CvDetails> getById(int id) {
 		CvDetails cvDetails = cvDetailsDao.findById(id);
 		return new SuccessDataResult<CvDetails>(cvDetails);
 	}
-	
-	
 
 }

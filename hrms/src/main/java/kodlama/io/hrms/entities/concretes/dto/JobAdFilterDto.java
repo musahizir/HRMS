@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobAdFilterDto {
-	
+
 	private List<Integer> cityId;
-	
+
 	private List<Integer> jobId;
-	
+
 	private List<Integer> jobAdWorkingStyleId;
-	
+
 	private List<Integer> jobAdShiftId;
 
 }

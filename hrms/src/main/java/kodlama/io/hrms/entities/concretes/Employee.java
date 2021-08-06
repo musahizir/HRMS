@@ -10,20 +10,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="employees")
-@PrimaryKeyJoinColumn(name="employee_id")
-public class Employee extends User{
-	
-	@Column(name="employee_first_name")
+@Table(name = "employees")
+@PrimaryKeyJoinColumn(name = "employee_id")
+public class Employee extends User {
+
+	@Column(name = "employee_first_name")
 	private String firstName;
-	
-	@Column(name="employee_last_name")
+
+	@Column(name = "employee_last_name")
 	private String lastName;
 
 }

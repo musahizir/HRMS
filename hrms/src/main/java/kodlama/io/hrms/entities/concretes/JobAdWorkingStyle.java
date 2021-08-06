@@ -21,17 +21,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Table(name="job_ad_working_style")
+@Table(name = "job_ad_working_style")
 public class JobAdWorkingStyle {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="job_ad_working_style_id")
+	@Column(name = "job_ad_working_style_id")
 	private int jobAdWorkingStyleId;
-	
-	@Column(name="job_ad_working_style_type")
+
+	@Column(name = "job_ad_working_style_type")
 	private String jobAdWorkingStyleType;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "jobAdWorkingStyle")
 	private List<JobAd> jobAd;

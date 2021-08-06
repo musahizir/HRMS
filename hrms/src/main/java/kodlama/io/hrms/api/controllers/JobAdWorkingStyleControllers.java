@@ -25,18 +25,18 @@ public class JobAdWorkingStyleControllers {
 		super();
 		this.jobAdWorkingStyleService = jobAdWorkingStyleService;
 	}
-	
+
 	@GetMapping("/getAll")
-	public DataResult<List<JobAdWorkingStyle>> getAll(){
-		
+	public DataResult<List<JobAdWorkingStyle>> getAll() {
+
 		return this.jobAdWorkingStyleService.getAll();
-		
+
 	}
-	
+
 	@GetMapping("/getById")
-	public DataResult<JobAdWorkingStyle> getById(@RequestParam int id){
-		
+	public DataResult<JobAdWorkingStyle> getById(@RequestParam int id) {
+
 		return this.jobAdWorkingStyleService.getById(id);
 	}
-	
+
 }

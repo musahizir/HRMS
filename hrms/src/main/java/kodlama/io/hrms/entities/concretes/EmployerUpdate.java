@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -16,21 +14,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "favorite_job_add")
+@Table(name = "employer_update")
 @Entity
-public class FavoriteJobAd {
+public class EmployerUpdate {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "favorite_job_add_id")
-	private int favoriteJobAddId;
+	@Column(name = "employer_update_id")
+	private int employerUpdateId;
 
-	@ManyToOne()
-	@JoinColumn(name = "job_ad_id")
-	private JobAd jobAd;
-
-	@ManyToOne()
-	@JoinColumn(name = "candidate_id")
-	private Candidate candidate;
-
+	@Column(name = "employer_update_json")
+	private String employerUpdateJson;
 }

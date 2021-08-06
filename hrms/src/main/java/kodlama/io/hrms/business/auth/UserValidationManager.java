@@ -8,17 +8,15 @@ import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.entities.concretes.User;
 
 @Service
-public class UserValidationManager implements UserValidationService{
+public class UserValidationManager implements UserValidationService {
 
-	
 	public Result userNullCheck(User user) {
-		
-		if ((user.getEmail() == null || user.getEmail().isBlank()) || (user.getPassword() == null || user.getPassword().isBlank())) {
-            return new ErrorResult("Bütün alanları doldurunuz");
-        }
-        return new SuccessResult();
-    }
-	
+
+		if ((user.getEmail() == null || user.getEmail().isBlank())
+				|| (user.getPassword() == null || user.getPassword().isBlank())) {
+			return new ErrorResult("Bütün alanları doldurunuz");
+		}
+		return new SuccessResult();
+	}
+
 }
-
-

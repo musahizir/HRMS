@@ -21,8 +21,6 @@ public class CvExperienceManager implements CvExperienceService {
 	private CvExperienceDao cvExperienceDao;
 	private CvService cvService;
 
-	
-
 	@Autowired
 	public CvExperienceManager(CvExperienceDao cvExperienceDao, CvService cvService) {
 		super();
@@ -34,27 +32,27 @@ public class CvExperienceManager implements CvExperienceService {
 	public Result add(CvExperienceDto cvExperienceDto) {
 
 		CvExperience cvExperienceAdd = new CvExperience();
-		
+
 		cvExperienceAdd.setCvExperienceCompanyName(cvExperienceDto.getCvExperienceCompanyName());
 		cvExperienceAdd.setCvExperienceLeaveDate(cvExperienceDto.getCvExperienceLeaveDate());
 		cvExperienceAdd.setCvExperiencePosition(cvExperienceDto.getCvExperiencePosition());
 		cvExperienceAdd.setCvExperienceStartDate(cvExperienceDto.getCvExperienceStartDate());
 		cvExperienceAdd.setCv(cvService.getById(cvExperienceDto.getCvId()).getData());
-		
+
 		cvExperienceDao.save(cvExperienceAdd);
-		
+
 		return new SuccessResult("İş tecrübesi eklendi");
 	}
 
 	@Override
 	public Result update(CvExperienceDto cvExperienceDto, int id) {
-		
+
 		CvExperience cvExperienceUpdate = cvExperienceDao.getOne(id);
 		cvExperienceUpdate.setCvExperienceCompanyName(cvExperienceDto.getCvExperienceCompanyName());
 		cvExperienceUpdate.setCvExperienceLeaveDate(cvExperienceDto.getCvExperienceLeaveDate());
 		cvExperienceUpdate.setCvExperiencePosition(cvExperienceDto.getCvExperiencePosition());
 		cvExperienceUpdate.setCvExperienceStartDate(cvExperienceDto.getCvExperienceStartDate());
-		
+
 		cvExperienceDao.save(cvExperienceUpdate);
 		return new SuccessResult("İş tecrübesi güncellendi");
 	}
@@ -70,14 +68,14 @@ public class CvExperienceManager implements CvExperienceService {
 
 		return new SuccessDataResult<List<CvExperience>>(
 				this.cvExperienceDao.getAllByCv_CvIdOrderByCvExperienceLeaveDateDesc(cvId), "");
-		
+
 	}
 
 	@Override
 	public DataResult<List<CvExperience>> getAllByCv_CvId(int cvId) {
 
 		return new SuccessDataResult<List<CvExperience>>(this.cvExperienceDao.getAllByCv_CvId(cvId), "");
-	
+
 	}
 
 	@Override

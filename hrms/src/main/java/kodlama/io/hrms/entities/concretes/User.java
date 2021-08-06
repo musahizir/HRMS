@@ -20,31 +20,24 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="users")
+@Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User  {
-	
-	
-	
+public abstract class User {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	
 
-	@Column(name="email")
+	@Column(name = "email")
 	@Email
 	@NotBlank
 	@NotNull
 	private String email;
-	
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	@NotBlank
 	@NotNull
 	private String password;
-	
-	
-	
 
 }

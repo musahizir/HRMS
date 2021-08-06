@@ -11,15 +11,13 @@ import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAccess.abstracts.EmployeeDao;
-import kodlama.io.hrms.entities.concretes.CvLink;
 import kodlama.io.hrms.entities.concretes.Employee;
 
 @Service
-public class EmployeeManager implements EmployeeService{
+public class EmployeeManager implements EmployeeService {
 
-	
 	private EmployeeDao employeeDao;
-	
+
 	@Autowired
 	public EmployeeManager(EmployeeDao employeeDao) {
 		super();
@@ -28,34 +26,33 @@ public class EmployeeManager implements EmployeeService{
 
 	@Override
 	public DataResult<List<Employee>> getAll() {
-		
-		return new SuccessDataResult<List<Employee>>(this.employeeDao.findAll(),"Liste getirildi");
+
+		return new SuccessDataResult<List<Employee>>(this.employeeDao.findAll(), "Liste getirildi");
 	}
 
 	@Override
 	public Result add(Employee employee) {
-		
-		
+
 		this.employeeDao.save(employee);
 		return new SuccessResult("Çalışan eklendi");
 	}
 
 	@Override
 	public Result update(Employee employee, int id) {
-		
+
 		Employee employeeUpdate = employeeDao.getOne(id);
 		employeeUpdate.setEmail(employee.getEmail());
 		employeeUpdate.setFirstName(employee.getFirstName());
 		employeeUpdate.setLastName(employee.getLastName());
 		employeeUpdate.setPassword(employee.getPassword());
-		
+
 		employeeDao.save(employeeUpdate);
 		return new SuccessResult();
 	}
 
 	@Override
 	public Result delete(int employeeId) {
-		
+
 		this.employeeDao.deleteById(employeeId);
 		return new SuccessResult();
 	}
@@ -63,7 +60,7 @@ public class EmployeeManager implements EmployeeService{
 	@Override
 	public DataResult<Employee> getById(int id) {
 		Employee employee = employeeDao.findById(id);
-		
+
 		return new SuccessDataResult<Employee>(employee);
 	}
 
