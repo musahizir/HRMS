@@ -3,6 +3,7 @@ package kodlama.io.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ import kodlama.io.hrms.entities.concretes.Employee;
 @CrossOrigin
 public class EmployeeControllers {
 
-	private EmployeeService employeeService;
+	private final EmployeeService employeeService;
 
 	@Autowired
 	public EmployeeControllers(EmployeeService employeeService) {
@@ -58,6 +59,14 @@ public class EmployeeControllers {
 
 		return this.employeeService.getById(id);
 
+	}
+	
+	@PostMapping("/saveRoleToEmployee")
+	public ResponseEntity<?> saveRoleToEmployee(@RequestBody String email, String roleName){
+		
+		employeeService.addRoleToUser(email, roleName);
+		
+		return ResponseEntity.ok().build();		
 	}
 
 }

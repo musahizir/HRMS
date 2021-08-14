@@ -1,18 +1,14 @@
 package kodlama.io.hrms.entities.concretes;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Objects;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cv_photo")
@@ -28,4 +24,17 @@ public class CvPhoto {
 	@Column(name = "cv_photo_url")
 	private String cvPhotoUrl;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		CvPhoto cvPhoto = (CvPhoto) o;
+
+		return Objects.equals(cvPhotoId, cvPhoto.cvPhotoId);
+	}
+
+	@Override
+	public int hashCode() {
+		return 1832193989;
+	}
 }

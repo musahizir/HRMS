@@ -15,7 +15,7 @@ import kodlama.io.hrms.entities.concretes.JobAdShift;
 @Service
 public class JobAdShiftManager implements JobAdShiftService {
 
-	private JobAdShiftDao jobAdShiftDao;
+	private final JobAdShiftDao jobAdShiftDao;
 
 	@Autowired
 	public JobAdShiftManager(JobAdShiftDao jobAdShiftDao) {
@@ -26,15 +26,15 @@ public class JobAdShiftManager implements JobAdShiftService {
 	@Override
 	public DataResult<List<JobAdShift>> getAll() {
 
-		return new SuccessDataResult<List<JobAdShift>>(this.jobAdShiftDao.findAll());
+		return new SuccessDataResult<>(this.jobAdShiftDao.findAll());
 	}
 
 	@Override
 	public DataResult<JobAdShift> getById(int id) {
-		JobAdShift jobAdShift = jobAdShiftDao.findById(id);
+		JobAdShift jobAdShift = jobAdShiftDao.findByJobAdShiftId(id);
 		if (jobAdShift == null)
-			return new ErrorDataResult<JobAdShift>();
-		return new SuccessDataResult<JobAdShift>(jobAdShift);
+			return new ErrorDataResult<>();
+		return new SuccessDataResult<>(jobAdShift);
 	}
 
 }

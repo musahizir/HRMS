@@ -1,23 +1,16 @@
 package kodlama.io.hrms.entities.concretes;
 
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,6 +28,20 @@ public class JobPosition {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "jobPosition", fetch = FetchType.LAZY)
+	@ToString.Exclude
 	private List<JobAd> jobAd;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		JobPosition that = (JobPosition) o;
+
+		return Objects.equals(jobId, that.jobId);
+	}
+
+	@Override
+	public int hashCode() {
+		return 255751276;
+	}
 }

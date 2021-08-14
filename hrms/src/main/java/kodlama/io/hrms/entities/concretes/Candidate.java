@@ -1,24 +1,18 @@
 package kodlama.io.hrms.entities.concretes;
 
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import javax.validation.constraints.Min;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import java.util.List;
+import java.util.Objects;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
+@ToString
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,10 +36,25 @@ public class Candidate extends User {
 
 	@OneToMany(mappedBy = "candidate")
 	@JsonIgnore
+	@ToString.Exclude
 	private List<Cv> cv;
 
 	@OneToMany(mappedBy = "candidate")
 	@JsonIgnore
+	@ToString.Exclude
 	private List<FavoriteJobAd> favoriteJobAd;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Candidate candidate = (Candidate) o;
+
+		return Objects.equals(getId(), candidate.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return 703906644;
+	}
 }

@@ -1,9 +1,13 @@
 package kodlama.io.hrms.business.concretes;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kodlama.io.hrms.business.abstracts.CandidateService;
+import kodlama.io.hrms.business.abstracts.RoleService;
 import kodlama.io.hrms.business.auth.CandidateValidationService;
 import kodlama.io.hrms.core.concretes.BusinessRules;
 import kodlama.io.hrms.core.utilities.results.DataResult;
@@ -14,34 +18,28 @@ import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAccess.abstracts.CandidateDao;
 import kodlama.io.hrms.dataAccess.abstracts.UserDao;
 import kodlama.io.hrms.entities.concretes.Candidate;
-import kodlama.io.hrms.entities.concretes.dto.CvDto;
+import kodlama.io.hrms.entities.concretes.Role;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Transactional
+@Slf4j
 public class CandidateManager extends UserManager<Candidate> implements CandidateService {
 
-	private CandidateDao candidateDao;
-	private CandidateValidationService candidateValidationService;
-//	private MernisService mernisService;
-//	private CvDetailsService cvDetailsService;
-//	private CvExperienceService cvExperienceService;
-//	private CvLanguageService cvLanguageService;
-//	private CvProgrammingLanguageService cvProgrammingLanguageService;
-//	private CvSchoolService cvSchoolService;
-//	private CvLinkService cvLinkService;
+	private final CandidateDao candidateDao;
+	private final CandidateValidationService candidateValidationService;
+	private final RoleService roleService;
+	private final PasswordEncoder passwordEncoder;
+
 
 	@Autowired
-	public CandidateManager(UserDao<Candidate> userDao, CandidateDao candidateDao,
-			CandidateValidationService candidateValidationService) {
-		super(userDao);
+	public CandidateManager(UserDao<Candidate> userDao, RoleService roleService, PasswordEncoder passwordEncoder,
+			CandidateDao candidateDao, CandidateValidationService candidateValidationService) {
+		super(userDao, roleService, passwordEncoder);
 		this.candidateDao = candidateDao;
 		this.candidateValidationService = candidateValidationService;
-//		this.mernisService = mernisService;
-//		this.cvDetailsService = cvDetailsService;
-//		this.cvExperienceService = cvExperienceService;
-//		this.cvLanguageService = cvLanguageService;
-//		this.cvProgrammingLanguageService = cvProgrammingLanguageService;
-//		this.cvSchoolService = cvSchoolService;
-//		this.cvLinkService = cvLinkService;
+		this.roleService = roleService;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
@@ -62,7 +60,9 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
 			}
 			return new ErrorResult("Mernis hatası");
 		}
-		return new SuccessDataResult<Candidate>(this.candidateDao.save(candidate), "İş arayan eklendi");
+		log.info("Kullanıcı {} database'e eklendi", candidate.getId());
+		candidate.setPassword(passwordEncoder.encode(candidate.getPassword()));
+		return new SuccessDataResult<>(this.candidateDao.save(candidate), "İş arayan eklendi");
 
 	}
 
@@ -88,14 +88,19 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
 
 	@Override
 	public DataResult<Candidate> getById(int id) {
-		Candidate candidate = candidateDao.findById(id);
-		return new SuccessDataResult<Candidate>(candidate);
+		Candidate candidate = candidateDao.getById(id);
+		return new SuccessDataResult<>(candidate);
 	}
 
 	@Override
-	public DataResult<CvDto> getCvByCandidateId(int candidateId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void addRoleToUser(String email, String roleName) {
 
+		log.info("İş arayana {} rol {} eklendi", email, roleName);
+
+		Role role = roleService.getByRoleName(roleName);
+		Candidate candidate = candidateDao.getByEmail(email);
+
+		candidate.getRoles().add(role);
+
+	}
 }

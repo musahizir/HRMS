@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlama.io.hrms.business.cvservices.CvDetailsService;
+import kodlama.io.hrms.business.abstracts.cvservices.CvDetailsService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.CvDetails;
@@ -22,7 +22,7 @@ import kodlama.io.hrms.entities.concretes.dto.CvDetailsDto;
 @CrossOrigin
 public class CvDetailsController {
 
-	private CvDetailsService cvDetailsService;
+	private final CvDetailsService cvDetailsService;
 
 	@Autowired
 	public CvDetailsController(CvDetailsService cvDetailsService) {
@@ -58,8 +58,8 @@ public class CvDetailsController {
 	}
 
 	@GetMapping("/getAllByCv")
-	public DataResult<List<CvDetails>> getAllByCv_CvId(int cvId) {
+	public DataResult<List<CvDetails>> getAllByCvId(int cvId) {
 
-		return this.cvDetailsService.getAllByCv_CvId(cvId);
+		return this.cvDetailsService.getAllByCvId(cvId);
 	}
 }

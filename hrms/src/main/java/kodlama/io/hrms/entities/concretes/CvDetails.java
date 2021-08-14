@@ -1,19 +1,14 @@
 package kodlama.io.hrms.entities.concretes;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "cv_details")
@@ -32,4 +27,17 @@ public class CvDetails {
 	@JoinColumn(name = "cv_id")
 	private Cv cv;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		CvDetails cvDetails = (CvDetails) o;
+
+		return Objects.equals(cvDetailsId, cvDetails.cvDetailsId);
+	}
+
+	@Override
+	public int hashCode() {
+		return 1405432436;
+	}
 }

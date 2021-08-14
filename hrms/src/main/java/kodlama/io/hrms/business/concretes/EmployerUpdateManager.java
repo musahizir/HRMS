@@ -12,7 +12,7 @@ import kodlama.io.hrms.entities.concretes.EmployerUpdate;
 @Service
 public class EmployerUpdateManager implements EmployerUpdateService {
 
-	private EmployerUpdateDao employerUpdateDao;
+	private final EmployerUpdateDao employerUpdateDao;
 
 	@Autowired
 	public EmployerUpdateManager(EmployerUpdateDao employerUpdateDao) {
@@ -23,7 +23,7 @@ public class EmployerUpdateManager implements EmployerUpdateService {
 	@Override
 	public DataResult<EmployerUpdate> employerSaveJson(EmployerUpdate employerUpdate) {
 
-		return new SuccessDataResult<EmployerUpdate>(employerUpdateDao.save(employerUpdate));
+		return new SuccessDataResult<>(employerUpdateDao.save(employerUpdate));
 	}
 
 }

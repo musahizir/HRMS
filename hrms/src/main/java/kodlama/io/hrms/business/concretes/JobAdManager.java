@@ -27,12 +27,12 @@ import kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto;
 @Service
 public class JobAdManager implements JobAdService {
 
-	private JobAdDao jobAdDao;
-	private CityService cityService;
-	private JobPositionService jobPositionService;
-	private EmployerService employerService;
-	private JobAdShiftService jobAdShiftService;
-	private JobAdWorkingStyleService jobAdWorkingStyleService;
+	private final JobAdDao jobAdDao;
+	private final CityService cityService;
+	private final JobPositionService jobPositionService;
+	private final EmployerService employerService;
+	private final JobAdShiftService jobAdShiftService;
+	private final JobAdWorkingStyleService jobAdWorkingStyleService;
 
 	@Autowired
 	public JobAdManager(JobAdDao jobAdDao, CityService cityService, JobPositionService jobPositionService,
@@ -105,7 +105,7 @@ public class JobAdManager implements JobAdService {
 			return new ErrorResult("İlan bulunamadı");
 		}
 
-		if (getById(id).getData().isJobAdIsActive() == false) {
+		if (!getById(id).getData().isJobAdIsActive()) {
 
 			return new ErrorResult("Bu ilan zaten kapalı");
 		}
@@ -121,26 +121,26 @@ public class JobAdManager implements JobAdService {
 	@Override
 	public DataResult<JobAd> getById(int id) {
 
-		return new SuccessDataResult<JobAd>(this.jobAdDao.getOne(id));
+		return new SuccessDataResult<>(this.jobAdDao.findByJobAdId(id));
 	}
 
 	@Override
 	public DataResult<List<JobAd>> findByjobAdIsActiveTrue() {
 
-		return new SuccessDataResult<List<JobAd>>(this.jobAdDao.findByjobAdIsActiveTrue(), "Aktif ilanlar listelendi");
+		return new SuccessDataResult<>(this.jobAdDao.findByjobAdIsActiveTrue(), "Aktif ilanlar listelendi");
 	}
 
 	@Override
 	public DataResult<List<JobAd>> findByOrderByJobAdPostedDate() {
 
-		return new SuccessDataResult<List<JobAd>>(this.jobAdDao.findByOrderByJobAdPostedDate(),
+		return new SuccessDataResult<>(this.jobAdDao.findByOrderByJobAdPostedDate(),
 				"İş ilanları tarihe göre listelendi");
 	}
 
 	@Override
 	public DataResult<List<JobAd>> getAllActiveJobAdByEmployer(int id) {
 
-		return new SuccessDataResult<List<JobAd>>(this.jobAdDao.getAllActiveJobAdByEmployer(id),
+		return new SuccessDataResult<>(this.jobAdDao.getAllActiveJobAdByEmployer(id),
 				"İş verene ait tüm ilanlar listelendi");
 	}
 
@@ -184,7 +184,7 @@ public class JobAdManager implements JobAdService {
 	@Override
 	public DataResult<List<JobAd>> getAllByJobAdIsConfirmedFalse() {
 
-		return new SuccessDataResult<List<JobAd>>(this.jobAdDao.getAllByJobAdIsConfirmedFalse());
+		return new SuccessDataResult<>(this.jobAdDao.getAllByJobAdIsConfirmedFalse());
 	}
 
 	@Override
@@ -210,7 +210,7 @@ public class JobAdManager implements JobAdService {
 	@Override
 	public DataResult<List<JobAd>> getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue() {
 
-		return new SuccessDataResult<List<JobAd>>(this.jobAdDao.getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue());
+		return new SuccessDataResult<>(this.jobAdDao.getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue());
 	}
 
 	@Override
@@ -229,12 +229,10 @@ public class JobAdManager implements JobAdService {
 
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 
-//		var data = this.jobAdDao.getByFilter(jobAdFilterDto, pageable);
-
-		return new SuccessDataResult<List<JobAd>>(this.jobAdDao.getByFilter(jobAdFilterDto, pageable).getContent(),
+		return new SuccessDataResult<>(this.jobAdDao.getByFilter(jobAdFilterDto, pageable).getContent(),
 				this.jobAdDao.getByFilter(jobAdFilterDto, pageable).getTotalElements() + "");
 	}
 
-//	data.getContent(), String.valueOf(data.getTotalPages())
+
 
 }

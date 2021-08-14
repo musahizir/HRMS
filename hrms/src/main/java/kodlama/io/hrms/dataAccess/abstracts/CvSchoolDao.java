@@ -12,6 +12,6 @@ public interface CvSchoolDao extends JpaRepository<CvSchool, Integer> {
 
 	List<CvSchool> getAllByCv_CvId(int cvId);
 
-	CvSchool findById(int id);
+	CvSchool findByCvSchoolId(int id);
 
 }

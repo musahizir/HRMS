@@ -18,7 +18,7 @@ import kodlama.io.hrms.entities.concretes.JobAdWorkingStyle;
 @CrossOrigin
 public class JobAdWorkingStyleControllers {
 
-	private JobAdWorkingStyleService jobAdWorkingStyleService;
+	private final JobAdWorkingStyleService jobAdWorkingStyleService;
 
 	@Autowired
 	public JobAdWorkingStyleControllers(JobAdWorkingStyleService jobAdWorkingStyleService) {

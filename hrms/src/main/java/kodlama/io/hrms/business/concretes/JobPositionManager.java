@@ -19,8 +19,8 @@ import kodlama.io.hrms.entities.concretes.JobPosition;
 @Service
 public class JobPositionManager implements JobPositionService {
 
-	private JobPositionDao jobDao;
-	private JobPositionValidationService jobValidationService;
+	private final JobPositionDao jobDao;
+	private final JobPositionValidationService jobValidationService;
 
 	@Autowired
 	public JobPositionManager(JobPositionDao jobDao, JobPositionValidationService jobValidationService) {
@@ -32,7 +32,7 @@ public class JobPositionManager implements JobPositionService {
 	@Override
 	public DataResult<List<JobPosition>> getAll() {
 
-		return new SuccessDataResult<List<JobPosition>>(this.jobDao.findAll(), "Data Listelendi");
+		return new SuccessDataResult<>(this.jobDao.findAll(), "Data Listelendi");
 	}
 
 	@Override
@@ -50,11 +50,11 @@ public class JobPositionManager implements JobPositionService {
 
 	@Override
 	public DataResult<JobPosition> getById(int id) {
-		JobPosition jobPosition = jobDao.findById(id);
+		JobPosition jobPosition = jobDao.findByJobId(id);
 
 		if (jobPosition == null)
-			return new ErrorDataResult<JobPosition>();
+			return new ErrorDataResult<>();
 
-		return new SuccessDataResult<JobPosition>(jobPosition);
+		return new SuccessDataResult<>(jobPosition);
 	}
 }

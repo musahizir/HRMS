@@ -15,7 +15,7 @@ import kodlama.io.hrms.entities.concretes.EmployerUpdate;
 @RequestMapping("/api/employerUpdate")
 public class EmployerUpdateController {
 
-	private EmployerUpdateService employerUpdateService;
+	private final EmployerUpdateService employerUpdateService;
 
 	@Autowired
 	public EmployerUpdateController(EmployerUpdateService employerUpdateService) {

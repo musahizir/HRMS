@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlama.io.hrms.business.cvservices.CvLanguageService;
+import kodlama.io.hrms.business.abstracts.cvservices.CvLanguageService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.CvLanguage;
@@ -22,7 +22,7 @@ import kodlama.io.hrms.entities.concretes.dto.CvLanguageDto;
 @CrossOrigin
 public class CvLanguageController {
 
-	private CvLanguageService cvLanguageService;
+	private final CvLanguageService cvLanguageService;
 
 	@Autowired
 	public CvLanguageController(CvLanguageService cvLanguageService) {
@@ -50,9 +50,9 @@ public class CvLanguageController {
 	}
 
 	@GetMapping("/getAllByCv")
-	public DataResult<List<CvLanguage>> getAllByCv_CvId(int cvId) {
+	public DataResult<List<CvLanguage>> getAllByCvId(int cvId) {
 
-		return this.cvLanguageService.getAllByCv_CvId(cvId);
+		return this.cvLanguageService.getAllByCvId(cvId);
 	}
 
 	@GetMapping("/getById")

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlama.io.hrms.business.cvservices.CvExperienceService;
+import kodlama.io.hrms.business.abstracts.cvservices.CvExperienceService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.CvExperience;
@@ -22,7 +22,7 @@ import kodlama.io.hrms.entities.concretes.dto.CvExperienceDto;
 @CrossOrigin
 public class CvExperienceController {
 
-	private CvExperienceService cvExperienceService;
+	private final CvExperienceService cvExperienceService;
 
 	@Autowired
 	public CvExperienceController(CvExperienceService cvExperienceService) {
@@ -56,9 +56,9 @@ public class CvExperienceController {
 	}
 
 	@GetMapping("/getAllByCv")
-	public DataResult<List<CvExperience>> getAllByCv_CvId(int cvId) {
+	public DataResult<List<CvExperience>> getAllByCvId(int cvId) {
 
-		return this.cvExperienceService.getAllByCv_CvId(cvId);
+		return this.cvExperienceService.getAllByCvId(cvId);
 	}
 
 	@GetMapping("/getById")
