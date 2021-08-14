@@ -17,7 +17,7 @@ import kodlama.io.hrms.entities.concretes.City;
 @CrossOrigin
 public class CityController {
 
-	private CityService cityService;
+	private final CityService cityService;
 
 	@Autowired
 	public CityController(CityService cityService) {

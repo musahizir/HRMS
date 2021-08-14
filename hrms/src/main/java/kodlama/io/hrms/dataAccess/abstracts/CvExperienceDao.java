@@ -12,6 +12,6 @@ public interface CvExperienceDao extends JpaRepository<CvExperience, Integer> {
 
 	List<CvExperience> getAllByCv_CvId(int cvId);
 
-	CvExperience findById(int id);
+	CvExperience findByCvExperienceId(int id);
 
 }

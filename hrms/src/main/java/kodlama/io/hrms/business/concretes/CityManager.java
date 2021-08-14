@@ -15,7 +15,7 @@ import kodlama.io.hrms.entities.concretes.City;
 @Service
 public class CityManager implements CityService {
 
-	private CityDao cityDao;
+	private final CityDao cityDao;
 
 	@Autowired
 	public CityManager(CityDao cityDao) {
@@ -26,16 +26,16 @@ public class CityManager implements CityService {
 	@Override
 	public DataResult<List<City>> getAll() {
 
-		return new SuccessDataResult<List<City>>(this.cityDao.findAll(), "Şehirler listelendi");
+		return new SuccessDataResult<>(this.cityDao.findAll(), "Şehirler listelendi");
 	}
 
 	@Override
 	public DataResult<City> getById(int id) {
-		City city = cityDao.findById(id);
+		City city = cityDao.findByCityId(id);
 		if (city == null)
-			return new ErrorDataResult<City>();
+			return new ErrorDataResult<>();
 
-		return new SuccessDataResult<City>(city);
+		return new SuccessDataResult<>(city);
 	}
 
 }

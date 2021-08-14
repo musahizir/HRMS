@@ -22,7 +22,7 @@ public interface JobAdDao extends JpaRepository<JobAd, Integer> {
 
 	List<JobAd> getAllByJobAdIsConfirmedFalse();
 
-	List<JobAd> findById(int id);
+	JobAd findByJobAdId(int id);
 
 	@Query("From JobAd where jobAdIsConfirmed = false and jobAdConfirmRequest = true ")
 	List<JobAd> getAllByJobAdIsConfirmedFalseAndConfirmRequestTrue();

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlama.io.hrms.business.cvservices.CvSchoolService;
+import kodlama.io.hrms.business.abstracts.cvservices.CvSchoolService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.CvSchool;
@@ -22,7 +22,7 @@ import kodlama.io.hrms.entities.concretes.dto.CvSchoolDto;
 @CrossOrigin
 public class CvSchoolController {
 
-	private CvSchoolService cvSchoolService;
+	private final CvSchoolService cvSchoolService;
 
 	@Autowired
 	public CvSchoolController(CvSchoolService cvSchoolService) {
@@ -50,15 +50,15 @@ public class CvSchoolController {
 	}
 
 	@GetMapping("/getAllByCandidateIdOrderByCvSchoolGraduateDate")
-	public DataResult<List<CvSchool>> getAllByCv_CvIdOrderByCvSchoolGraduateDate(int cvId) {
+	public DataResult<List<CvSchool>> getAllByCvIdOrderByCvSchoolGraduateDate(int cvId) {
 
-		return this.cvSchoolService.getAllByCv_CvIdOrderByCvSchoolGraduateDate(cvId);
+		return this.cvSchoolService.getAllByCvIdOrderByCvSchoolGraduateDate(cvId);
 	}
 
 	@GetMapping("/getAllByCv")
-	public DataResult<List<CvSchool>> getAllByCv_CvId(int cvId) {
+	public DataResult<List<CvSchool>> getAllByCvId(int cvId) {
 
-		return this.cvSchoolService.getAllByCv_CvId(cvId);
+		return this.cvSchoolService.getAllByCvId(cvId);
 	}
 
 	@GetMapping("/getById")

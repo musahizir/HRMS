@@ -10,5 +10,5 @@ public interface CvLanguageDao extends JpaRepository<CvLanguage, Integer> {
 
 	List<CvLanguage> getAllByCv_CvId(int cvId);
 
-	CvLanguage findById(int id);
+	CvLanguage findByCvLanguageId(int id);
 }

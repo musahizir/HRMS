@@ -23,7 +23,7 @@ import kodlama.io.hrms.entities.concretes.dto.JobAdRegisterDto;
 @CrossOrigin
 public class JobAdController {
 
-	private JobAdService jobAdService;
+	private final JobAdService jobAdService;
 
 	@Autowired
 	public JobAdController(JobAdService jobAdService) {

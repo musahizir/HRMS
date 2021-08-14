@@ -1,21 +1,14 @@
 package kodlama.io.hrms.entities.concretes;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Objects;
 
-import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cv_programming_language")
@@ -37,4 +30,17 @@ public class CvProgrammingLanguage {
 	@JoinColumn(name = "cv_id")
 	private Cv cv;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		CvProgrammingLanguage that = (CvProgrammingLanguage) o;
+
+		return Objects.equals(cvProgrammingLanguageId, that.cvProgrammingLanguageId);
+	}
+
+	@Override
+	public int hashCode() {
+		return 1650173991;
+	}
 }

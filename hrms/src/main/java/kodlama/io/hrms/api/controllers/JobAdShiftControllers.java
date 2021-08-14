@@ -17,7 +17,7 @@ import kodlama.io.hrms.entities.concretes.JobAdShift;
 @CrossOrigin
 public class JobAdShiftControllers {
 
-	private JobAdShiftService jobAdShiftService;
+	private final JobAdShiftService jobAdShiftService;
 
 	@Autowired
 	public JobAdShiftControllers(JobAdShiftService jobAdShiftService) {

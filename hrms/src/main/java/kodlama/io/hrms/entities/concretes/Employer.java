@@ -1,22 +1,16 @@
 package kodlama.io.hrms.entities.concretes;
 
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
+@ToString
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,6 +30,20 @@ public class Employer extends User {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "employer")
+	@ToString.Exclude
 	private List<JobAd> jobAd;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Employer employer = (Employer) o;
+
+		return Objects.equals(getId(), employer.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return 956758138;
+	}
 }

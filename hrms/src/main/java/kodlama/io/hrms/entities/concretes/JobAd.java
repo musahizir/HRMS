@@ -1,25 +1,17 @@
 package kodlama.io.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -80,6 +72,20 @@ public class JobAd {
 	private JobAdWorkingStyle jobAdWorkingStyle;
 
 	@OneToMany(mappedBy = "jobAd")
+	@ToString.Exclude
 	private List<FavoriteJobAd> favoriteJobAd;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		JobAd jobAd = (JobAd) o;
+
+		return Objects.equals(jobAdId, jobAd.jobAdId);
+	}
+
+	@Override
+	public int hashCode() {
+		return 1916360370;
+	}
 }

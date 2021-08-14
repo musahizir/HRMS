@@ -1,6 +1,7 @@
 package kodlama.io.hrms.api.controllers;
 
 
+import java.net.URI;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +13,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import kodlama.io.hrms.business.abstracts.CandidateService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.Candidate;
+
 
 @RestController
 @RequestMapping("/api/candidates")
 @CrossOrigin
 public class CandidatesController {
 
-	private CandidateService candidateService;
+	private final CandidateService candidateService;
 
 	@Autowired
 	public CandidatesController(CandidateService candidateService) {
@@ -39,7 +43,9 @@ public class CandidatesController {
 	@PostMapping("/add")
 	public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate) {
 
-		return ResponseEntity.ok(this.candidateService.add(candidate));
+		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/candidates/add").toUriString());
+		
+		return ResponseEntity.created(uri).body(this.candidateService.add(candidate));
 	}
 
 	@GetMapping("/getById")
@@ -49,4 +55,13 @@ public class CandidatesController {
 
 	}
 
+	@PostMapping("/saveRoleToCandidate")
+	public ResponseEntity<?> saveRoleToCandidate(@RequestBody String email, String roleName){
+		
+		candidateService.addRoleToUser(email, roleName);
+		
+		return ResponseEntity.ok().build();		
+	}
+	
+	
 }

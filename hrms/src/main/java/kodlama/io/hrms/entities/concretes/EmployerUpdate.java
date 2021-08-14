@@ -1,17 +1,14 @@
 package kodlama.io.hrms.entities.concretes;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "employer_update")
@@ -25,4 +22,18 @@ public class EmployerUpdate {
 
 	@Column(name = "employer_update_json")
 	private String employerUpdateJson;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		EmployerUpdate that = (EmployerUpdate) o;
+
+		return Objects.equals(employerUpdateId, that.employerUpdateId);
+	}
+
+	@Override
+	public int hashCode() {
+		return 2043062086;
+	}
 }

@@ -8,5 +8,5 @@ public interface JobPositionDao extends JpaRepository<JobPosition, Integer> {
 
 	JobPosition findByJobName(String jobName);
 
-	JobPosition findById(int id);
+	JobPosition findByJobId(int id);
 }

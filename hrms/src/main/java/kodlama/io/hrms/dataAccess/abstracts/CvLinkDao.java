@@ -10,5 +10,5 @@ public interface CvLinkDao extends JpaRepository<CvLink, Integer> {
 
 	List<CvLink> getAllByCv_CvId(int cvId);
 
-	CvLink findById(int id);
+	CvLink findByCvLinkId(int id);
 }

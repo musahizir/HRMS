@@ -10,6 +10,6 @@ public interface CvDetailsDao extends JpaRepository<CvDetails, Integer> {
 
 	List<CvDetails> getAllByCv_CvId(int cvId);
 
-	CvDetails findById(int id);
+	CvDetails findByCvDetailsId(int id);
 
 }

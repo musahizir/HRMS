@@ -6,6 +6,6 @@ import kodlama.io.hrms.entities.concretes.JobAdWorkingStyle;
 
 public interface JobAdWorkingStyleDao extends JpaRepository<JobAdWorkingStyle, Integer> {
 
-	JobAdWorkingStyle findById(int id);
+	JobAdWorkingStyle findByJobAdWorkingStyleId(int id);
 
 }

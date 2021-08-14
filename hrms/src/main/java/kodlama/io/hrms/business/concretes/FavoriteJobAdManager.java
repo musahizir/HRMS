@@ -19,9 +19,9 @@ import kodlama.io.hrms.entities.concretes.dto.FavoriteJobAdDto;
 @Service
 public class FavoriteJobAdManager implements FavoriteJobAdService {
 
-	private FavoriteJobAdDao favoriteJobAdDao;
-	private CandidateService candidateService;
-	private JobAdService jobAdService;
+	private final FavoriteJobAdDao favoriteJobAdDao;
+	private final CandidateService candidateService;
+	private final JobAdService jobAdService;
 
 	@Autowired
 	public FavoriteJobAdManager(FavoriteJobAdDao favoriteJobAdDao, CandidateService candidateService,
@@ -48,13 +48,13 @@ public class FavoriteJobAdManager implements FavoriteJobAdService {
 	@Override
 	public DataResult<List<FavoriteJobAd>> getByCandidateId(int id) {
 
-		return new SuccessDataResult<List<FavoriteJobAd>>(this.favoriteJobAdDao.getByCandidateId(id));
+		return new SuccessDataResult<>(this.favoriteJobAdDao.getByCandidateId(id));
 	}
 
 	@Override
 	public DataResult<List<FavoriteJobAd>> getAll() {
 
-		return new SuccessDataResult<List<FavoriteJobAd>>(this.favoriteJobAdDao.findAll());
+		return new SuccessDataResult<>(this.favoriteJobAdDao.findAll());
 	}
 
 }
